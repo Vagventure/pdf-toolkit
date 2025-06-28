@@ -17,17 +17,12 @@
         </div>
     </nav>
     <div class="container p-2 min-h-screen bg-amber-100 flex justify-center items-center">
-        <div class="w-2/3 h-80 p-7 border-2 space-y-8 text-center">
+        <div class="w-2/3 h-80 p-7 border-2 space-y-3 text-center">
             <div class="w-full h-2/3 flex items-center justify-center gap-5">
-                <figure class="h-24 w-auto object-contain">
+                <figure class="h-24 w-[100px] object-contain">
                     <img class="w-full h-full"
                         src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
                     <figcaption>Input Pdf</figcaption>
-                    <form method=post action="/tools" enctype=multipart/form-data>
-                        <input class="p-1 rounded-lg bg-green-400 text-white cursor-pointer" type=file name=file>
-                        <input class="p-1 rounded-lg bg-green-400 text-white cursor-pointer" type=submit value=Upload>
-                    </form>
-                    <!-- <button class="p-1 rounded-lg bg-green-400 text-white cursor-pointer">Upload</button> -->
                 </figure>
 
                 <img src="{{url_for('static', filename='icons/convert.svg')}}" alt="convert icon">
@@ -35,15 +30,27 @@
                     <img class="w-full h-full"
                         src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
                     <figcaption>Compress Pdf</figcaption>
-                    <button class="p-1 rounded-lg bg-green-400 text-white cursor-pointer">Download</button>
+
                 </figure>
             </div>
+            <form method=post action="/tools" enctype=multipart/form-data>
+                <label for="file-upload" class="p-1 rounded-lg bg-green-400 text-white cursor-pointer">
+                    Upload File
+                </label>
+                <input id="file-upload" class="hidden" type=file name=file onchange="this.form.submit()">
+               
+            </form>
             <div class=" w-full h-2/3 space-y-1">
-                <button class="p-1.5 rounded-lg bg-blue-500 text-white cursor-pointer">Compress</button>
                 <p class="text-lg underline">Compress your Pdfs easily with the compress tool</p>
             </div>
         </div>
-
+<script src="{{url_for('static', filename='script.js')}}"></script>
 </body>
 
 </html>
+
+<!-- <button class="p-1.5 rounded-lg bg-blue-500 text-white cursor-pointer">Compress</button> -->
+<!-- <form method=post action="/tools" enctype=multipart/form-data>
+                        <input class="p-1 rounded-lg bg-green-400 text-white cursor-pointer" type=file name=file>
+                        <input class="p-1 rounded-lg bg-green-400 text-white cursor-pointer" type=submit value=Upload>
+                    </form> -->

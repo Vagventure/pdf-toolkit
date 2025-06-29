@@ -25,7 +25,8 @@
                     <figcaption>Input Pdf</figcaption>
                 </figure>
 
-                <img class="blinker hidden" src="{{url_for('static', filename='icons/convert.svg')}}" alt="convert icon">
+                <img class="relative" src="{{url_for('static', filename='icons/convert.svg')}}" alt="convert icon">
+                <img class="blinker absolute ml-0.5 hidden" src="{{url_for('static', filename='icons/convert r.svg')}}" alt="convert r icon">
 
                 <figure class="h-24 w-auto object-contain">
                     <img class="w-full h-full"
@@ -34,7 +35,7 @@
 
                 </figure>
             </div>
-            <form method=post action="/tools" enctype=multipart/form-data>
+            <form method="POST" action="/tools" enctype=multipart/form-data onchange="this.submit()">
                 <label for="file-upload" class="p-1 rounded-lg bg-green-400 text-white cursor-pointer">
                     Upload File
                 </label>

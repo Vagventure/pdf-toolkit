@@ -1,12 +1,17 @@
 from flask import Flask
 from markupsafe import escape
-from flask import url_for
+from flask import url_for , jsonify
 from flask import render_template
 from flask import request
+from flask import send_from_directory
 from werkzeug.utils import secure_filename
+import os
+import subprocess
 
 
 app = Flask(__name__)
+UPLOAD_FOLDER = 'uploads'
+OUTPUT_FOLDER = 'output'
 
 @app.route("/")
 def hello_world():
@@ -15,11 +20,42 @@ def hello_world():
 @app.route("/tools", methods=['GET','POST'])
 def pdf_tool():
     if request.method == 'GET':
-     return render_template('tools.html')
+        return render_template('tools.html')
+    
     if request.method == 'POST':
         file = request.files['file']
-        file.save(f"uploads/{secure_filename(file.filename)}")
-        return render_template('tools.html')
+        if file:
+           fileName = secure_filename(file.filename)
+           Upload_path = os.path.join(UPLOAD_FOLDER,fileName)
+           output_fileName = f"Processed_{fileName}"
+           Output_path = os.path.join(OUTPUT_FOLDER,output_fileName)
+         
+           file.save(Upload_path)
+
+         # Pdf compresser 
+     
+           command = [
+              "gswin64c",
+              "-sDEVICE=pdfwrite",
+              "-dCompatibilityLevel=1.4",
+              "-dPDFSETTINGS=/screen",
+              "-dNOPAUSE",
+              "-dQUIET",
+              "-dBATCH",
+              f"-sOutputFile={Output_path}",
+             Upload_path
+            ]
+           
+           try:
+              subprocess.run(command, check=True)
+              print(f"Pdf successfully compressed to : {output_fileName}")
+              return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
+           except subprocess.CalledProcessError as e:
+              print("Compression failed try again : ",e)  
+              return jsonify(success=False, error="Ghostscript processing failed."), 500
+        
+        return jsonify(success=False, error="File upload failed"), 400
+    return render_template('tools.html')
 
 
 # @app.route('/tools', methods=['POST'])

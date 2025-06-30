@@ -10,18 +10,18 @@ import subprocess
 
 
 app = Flask(__name__)
-UPLOAD_FOLDER = 'uploads'
-OUTPUT_FOLDER = 'output'
+UPLOAD_FOLDER = os.path.abspath("uploads")
+OUTPUT_FOLDER = os.path.abspath("output")
 
 @app.route("/")
 def hello_world():
     return render_template('index.html')
 
-@app.route("/tools", methods=['GET','POST'])
-def pdf_tool():
+@app.route("/tools/<slug>", methods=['GET','POST'])
+def pdf_tool(slug):
     if request.method == 'GET':
-        return render_template('tools.html')
-    
+        return render_template("tooljinja.html", name=escape(slug) , operation="compress pdf")
+   
     if request.method == 'POST':
         file = request.files['file']
         if file:
@@ -55,7 +55,12 @@ def pdf_tool():
               return jsonify(success=False, error="Ghostscript processing failed."), 500
         
         return jsonify(success=False, error="File upload failed"), 400
-    return render_template('tools.html')
+    return render_template("tooljinja.html", name=escape(slug) , operation="compress pdf")
+
+# @app.route('/tools/<slug>')
+# def template(slug):
+    
+#     return render_template("tooljinja.html", name=escape(slug) , operation="compress pdf")
 
 
 # @app.route('/tools', methods=['POST'])

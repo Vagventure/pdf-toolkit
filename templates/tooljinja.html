@@ -17,8 +17,9 @@
         </div>
     </nav>
     <div class="container p-2 min-h-screen bg-amber-100 flex justify-center items-center">
-        <div class="w-2/3 h-80 p-7 border-2 space-y-3 text-center">
-            <div class="w-full h-2/3 flex items-center justify-center gap-5">
+        <div class="w-2/3 h-80 p-7 border-2 space-y-2 text-center">
+
+            <div class="w-full h-1/2 flex items-center justify-center gap-5">
                 <figure class="h-24 w-[100px] object-contain">
                     <img class="w-full h-full"
                         src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
@@ -26,30 +27,137 @@
                 </figure>
 
                 <img class="relative" src="{{url_for('static', filename='icons/convert.svg')}}" alt="convert icon">
-                <img class="blinker absolute ml-0.5 hidden" src="{{url_for('static', filename='icons/convert r.svg')}}" alt="convert r icon">
+                <img class="blinker absolute ml-0.5 hidden" src="{{url_for('static', filename='icons/convert r.svg')}}"
+                    alt="convert r icon">
 
                 <figure class="h-24 w-auto object-contain">
                     <img class="w-full h-full"
                         src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
-                    <figcaption>Compress Pdf</figcaption>
+                    <figcaption>{{operation}}</figcaption>
 
                 </figure>
             </div>
-            <form method="POST" action="/tools" enctype=multipart/form-data onchange="this.submit()">
+            <form class="option " method="POST" action="/tools/{{name}}" enctype="multipart/form-data">
                 <label for="file-upload" class="p-1 rounded-lg bg-green-400 text-white cursor-pointer">
                     Upload File
                 </label>
-                <div class="flex flex-col items-center">
-                <input id="file-upload" class="hidden" type="file" name="file" />
-                <progress id="upload-progress" value="0" max="100" class="w-1/3 mt-3"></progress>
+                <div class="flex flex-col items-center ">
+                    <input id="file-upload" class="hidden" type="file" name="files[]" onchange="this.form.submit()"
+                        multiple />
+                    <progress id="upload-progress" value="0" max="100" class="w-1/3 mt-3"></progress>
                 </div>
             </form>
             <div class=" w-full h-2/3 space-y-1">
                 <p class="text-lg underline">Compress your Pdfs easily with the compress tool</p>
             </div>
         </div>
-        <script src="{{url_for('static', filename='script.js')}}"></script>
+        <!-- <script src="{{url_for('static', filename='script.js')}}"></script> -->
+        <script>
+
+            op = document.title
+            console.log(op)
+
+            switch (op) {
+                case "Pdf Splitter":
+                    let box = document.querySelector(".option")
+                    box.innerHTML = `
+                                     <label for="file-upload" class="p-1 rounded-lg bg-green-400 text-white cursor-pointer">
+                                     Upload File
+                                     </label>
+                                     <div class="flex flex-col items-center">
+                                         <input id="file-upload" class="hidden" type="file" name="file" onChange= checkAndSubmit() />
+                                         
+                                        <div class="options w-auto mx-auto mt-3 items-center justify-center flex gap-7 h-auto"> <input
+                                                 class="bg-white text-black w-32 font-medium" id="start" type="text" placeholder="Start Page"
+                                                 name="start-page" onChange= checkAndSubmit()>
+                                             <input class="bg-white text-black w-32 font-medium" id="end" type="text" placeholder="End Page"
+                                                 name="end-page" onChange= checkAndSubmit()>
+                                         </div>
+                                         <progress id="upload-progress" value="0" max="100" class="w-1/3 mt-3"></progress>
+                                     </div>
+                                     `
+                    function checkAndSubmit() {
+                        const start = document.getElementById("start").value.trim();
+                        const end = document.getElementById("end").value.trim();
+                        const fileInput = document.getElementById("file-upload");
+                        const file = fileInput?.files?.[0];
+
+                        if (!(start && end && file)) return;
+
+                        const formData = new FormData();
+                        formData.append("start-page", start);
+                        formData.append("end-page", end);
+                        formData.append("file", file);
+
+                        const xhr = new XMLHttpRequest();
+                        xhr.open("POST", `/tools/${document.title}`, true);
+
+                        xhr.upload.onprogress = (e) => {
+                            if (e.lengthComputable) {
+                                document.getElementById("upload-progress").value = (e.loaded / e.total) * 100;
+                            }
+                        };
+
+                        xhr.onload = () => {
+                            if (xhr.status === 200) {
+                                alert("Upload complete");
+                            } else {
+                                alert("Upload failed");
+                            }
+                        };
+
+                        xhr.send(formData);
+                    }
+                    break;
+
+                default:
+                    const form = document.getElementById('upload-form')
+                    const fileInput = document.getElementById('file-upload');
+                    const progressBar = document.getElementById('upload-progress');
+                    fileInput.addEventListener('change', () => {
+                        const files = fileInput.files;
+                        if (!files) return;
+
+
+                        const xhr = new XMLHttpRequest()
+                        const formData = new FormData()
+
+                        for (let i = 0; i < files.length; i++) {
+                            formData.append('files[]', files[i])
+                        }
+
+                        xhr.open('POST', `/tools/${op}`, true)
+
+                        progressBar.classList.remove('hidden')
+
+                        xhr.upload.onprogress = (e) => {
+                            if (e.lengthComputable) {
+                                const percent = (e.loaded / e.total) * 100
+                                progressBar.value = percent
+                            }
+                        }
+
+                        xhr.onload = () => {
+                            if (xhr.status === 200) {
+                                alert("Upload complete")
+                                progressBar.value = 100
+
+                            } else {
+                                alert("Upload failed")
+                            }
+                        }
+
+                        xhr.send(formData)
+                    })
+
+                    setInterval(() => {
+                        sig = document.querySelector(".blinker")
+                        sig.classList.toggle('hidden')
+
+                    }, 500);
+            }
+
+        </script>
 </body>
 
 </html>
-

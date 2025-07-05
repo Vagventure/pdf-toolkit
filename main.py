@@ -41,6 +41,9 @@ def pdf_tool(slug):
       
        case "Pdf to TIFF":
            return pdf_TIFF(op)
+       
+       case "Pdf Encryptor":
+           return pdf_Locker(op)
   
     return render_template("tooljinja.html", name=op , operation="splitt pdf")      
          
@@ -253,6 +256,52 @@ def pdf_TIFF(name):
                   print("Conversion failed try again: ",e)    
 
             return jsonify(success=False, error="File upload failed"), 400
+
+def pdf_Locker(name):
+    if request.method == 'GET':
+             return render_template("tooljinja.html", name=name , operation="Pdf Locker")
+
+    if request.method == 'POST':
+            uploaded_files = request.files.getlist('files[]')
+            if uploaded_files:
+               for file in uploaded_files:
+                 fileName = secure_filename(file.filename)
+                 Upload_path = os.path.join(UPLOAD_FOLDER,fileName)
+                 output_fileName = f"Locked_{fileName}"
+                 Output_path = os.path.join(OUTPUT_FOLDER,output_fileName)
+                 
+                 file.save(Upload_path)
+                
+               user_pass = request.form.get("code")
+               owner_pass = f"{user_pass}@135"
+          #Ghostscript command
+               command = [
+                  "gswin64c",
+                  "-sDEVICE=pdfwrite",
+                  "-dCompatibilityLevel=1.4",
+                  "-dPDFSETTINGS=/default",
+                  "-dNOPAUSE",
+                  "-dBATCH",
+                  "-dQUIET",
+                  "-dEncryptionR=3",         # Encryption settings:       
+                  "-dKeyLength=128",
+                  f"-sUserPassword={user_pass}",
+                  f"-sOwnerPassword={owner_pass}",
+                  "-dPermissions=-4",
+                  f"-sOutputFile={Output_path}",
+                  Upload_path
+                ]
+              
+               try:
+                 subprocess.run(command, check=True)
+                 print(f"Pdf is successfully locked : {output_fileName}")
+                 return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
+                 
+               except subprocess.CalledProcessError as e:
+                 print("Process failed try again: ",e)           
+                 return jsonify(success=False, error="Ghostscript processing failed."), 500
+                 
+    return jsonify(success=False, error="File upload failed"), 400
 
 
 # @app.route('/tools/<slug>')

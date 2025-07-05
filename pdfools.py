@@ -164,15 +164,18 @@ def pdf_encrypt(input_path, output_path, user_pass, owner_pass):
  command = [
     gs_exe,
     "-sDEVICE=pdfwrite",
+    "-dCompatibilityLevel=1.4",
     "-dPDFSETTINGS=/default",
     "-dNOPAUSE",
-    "-dQUIET",
     "-dBATCH",
+    "-dQUIET",
+    "-dEncryptionR=3",         # Encryption settings:       
+    "-dKeyLength=128",
     f"-sUserPassword={user_pass}",
     f"-sOwnerPassword={owner_pass}",
+    "-dPermissions=-4",
     f"-sOutputFile={output_path}.pdf",
-    "-dEncrypt128",
-   f"{input_path}.pdf"
+    input_path
   ]
 
  try:

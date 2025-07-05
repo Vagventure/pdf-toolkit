@@ -129,39 +129,51 @@
                     function checkAndSubmit() {
                         const lock = document.getElementById("pass").value.trim();
                         const fileInput = document.getElementById("file-upload");
-                        const file = fileInput?.files?.[0];
-
-                        if (!(lock && file)) return;
+                        const file = fileInput.files[0];
+                        if (!lock || !file) return;
 
                         const formData = new FormData();
                         formData.append("code", lock);
-
                         formData.append("files[]", file);
 
                         const xhr = new XMLHttpRequest();
                         const endpoint = `/tools/${encodeURIComponent(op)}`;
-                        console.log("⟶ Encryptor POST →", endpoint);
                         xhr.open("POST", endpoint, true);
 
+                        // ← THIS is the missing piece
+                        xhr.responseType = "blob";
 
-                        xhr.upload.onprogress = (e) => {
+                        xhr.upload.onprogress = e => {
                             if (e.lengthComputable) {
-                                document.getElementById("upload-progress").value = (e.loaded / e.total) * 100;
+                                document.getElementById("upload-progress").value =
+                                    (e.loaded / e.total) * 100;
                             }
                         };
 
                         xhr.onload = () => {
                             if (xhr.status === 200) {
-                                alert("Upload complete");
+                                // now xhr.response is a Blob
+                                const blob = xhr.response;
+                                const cd = xhr.getResponseHeader("Content-Disposition") || "";
+                                const m = /filename="?(.+)"?/.exec(cd);
+                                const fname = m ? m[1] : "locked.pdf";
+
+                                const url = URL.createObjectURL(blob);
+                                const a = document.createElement("a");
+                                a.href = url;
+                                a.download = fname;
+                                document.body.appendChild(a);
+                                a.click();
+                                a.remove();
+                                URL.revokeObjectURL(url);
                             } else {
-                                alert("Upload failed");
+                                alert("Encryption failed: " + xhr.statusText);
                             }
                         };
 
-                        for (let [key, val] of formData.entries()) {
-                            console.log("FormData entry:", key, val);
-                        }
-
+                        xhr.onerror = () => {
+                            alert("Network error trying to encrypt.");
+                        };
 
                         xhr.send(formData);
                     }

@@ -295,6 +295,8 @@ def pdf_Locker(name):
                try:
                  subprocess.run(command, check=True)
                  print(f"Pdf is successfully locked : {output_fileName}")
+                 print("Output path: ",Output_path)
+                 print("Input Filename ",fileName)
                  return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
                  
                except subprocess.CalledProcessError as e:

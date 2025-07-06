@@ -29,25 +29,26 @@ def merger(input_files, output_path="merged.pdf"):
 
 
 # pdf splitter
-def splitter(input_file, start_page, end_page, output_path="Slpitted.pdf"): 
+def splitter(input_file,output_path, start_page, end_page): 
    gs_exe = "gswin64c"
 
    #Ghost Command
    command = [
       gs_exe,
       "-sDEVICE=pdfwrite",
+      "-dCompatibilityLevel=1.4",
       "-dBATCH",
       "-dQUIET",
       "-dNOPAUSE",
       f"-dFirstPage={start_page}",
       f"-dLastPage={end_page}",
-      f"-sOutputFile={output_path}",
+      f"-sOutputFile={output_path}.pdf",
       input_file
    ] 
 
    try:
       subprocess.run(command, check=True)
-      print("Pdf successfully splitted from {start_page}-{end_page} : ",output_path)
+      print(f"Pdf successfully splitted from {start_page}-{end_page} : ",output_path)
    except Exception as e:
       print("Splitting failed try again : ",e)   
 
@@ -249,7 +250,7 @@ while(val!=11):
          file2 = input("Output file name: ")
          Spage = int(input("Enter start page : "))
          Lpage = int(input("Enter end page : "))
-         splitter(file1,Spage,Lpage,file2)
+         splitter(file1,file2,Spage,Lpage)
      
      case 3:
          file1 = browse_file()

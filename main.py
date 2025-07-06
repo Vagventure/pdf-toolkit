@@ -129,6 +129,42 @@ def pdf_compress(name):
 def pdf_splitt(name):
    if request.method == 'GET':
        return render_template("tooljinja.html", name=name , operation="splitt pdf")
+   
+   if request.method == 'POST':
+             uploaded_files = request.files.getlist('files[]')
+             if uploaded_files:
+                for file in uploaded_files:
+                 fileName = secure_filename(file.filename)
+                 Upload_path = os.path.join(UPLOAD_FOLDER,fileName)
+                 output_fileName = f"Processed_{fileName}"
+                 Output_path = os.path.join(OUTPUT_FOLDER,output_fileName)
+                 Start_page = request.form.get("start-page")
+                 End_page = request.form.get("end-page")
+                 
+                 file.save(Upload_path)
+
+                 command = [
+                 "gswin64c",
+                 "-sDEVICE=pdfwrite",
+                 "-dCompatibilityLevel=1.4",
+                 "-dBATCH",
+                 "-dQUIET",
+                 "-dNOPAUSE",
+                 f"-dFirstPage={Start_page}",
+                 f"-dLastPage={End_page}",
+                 f"-sOutputFile={Output_path}",
+                 Upload_path
+                ] 
+                 
+                try:
+                   subprocess.run(command, check=True)
+                   print(f"Pdf successfully splitted from {Start_page}-{End_page} : ",output_fileName)
+                   return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
+                except subprocess.CalledProcessError as e:
+                   print("Splitting failed try again : ",e)  
+                   return jsonify(success=False, error="Ghostscript processing failed."), 500
+
+
   
 def pdf_PNG(name):
     if request.method == 'GET':

@@ -101,14 +101,16 @@ def pdf_compress(name):
                  Output_path = os.path.join(OUTPUT_FOLDER,output_fileName)
                  
                  file.save(Upload_path)
-     
+
+                quality = request.form.get('value') 
+               
               # Pdf compresser 
           
                 command = [
                    "gswin64c",
                    "-sDEVICE=pdfwrite",
                    "-dCompatibilityLevel=1.4",
-                   "-dPDFSETTINGS=/ebook",
+                   f"-dPDFSETTINGS={quality}",
                    "-dNOPAUSE",
                    "-dQUIET",
                    "-dBATCH",

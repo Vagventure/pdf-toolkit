@@ -139,7 +139,7 @@
         </figure>
         <img src="{{url_for('static', filename='icons/convert.svg')}}" alt="convert icon">
         <figure class="h-23  object-contain"><img class="w-full h-full"
-            src="https://st4.depositphotos.com/1000507/23793/v/600/depositphotos_237931072-stock-illustration-tagged-image-file-format.jpg">
+            src="https://st2.depositphotos.com/42596756/44437/v/600/depositphotos_444376980-stock-illustration-file-folders-vector-icon.jpg">
           <figcaption>Locked Pdf</figcaption>
         </figure>
       </div>
@@ -151,7 +151,19 @@
 
 
   </div>
-<script src="{{url_for('static', filename='script.js')}}"></script>
+
+<script>
+
+   document.querySelectorAll(".tools").forEach(e => {
+        e.addEventListener('click', (p) => {
+            let text = p.target.innerText.trim();  // or e.innerText
+            console.log(text);
+            window.open(`/tools/${encodeURIComponent(text)}`, '_blank')
+
+        })
+    })
+
+</script>
 </body>
 
 </html>

@@ -7,9 +7,9 @@ services:
     buildCommand: |
       apt-get update && apt-get install -y ghostscript
       pip install -r requirements.txt
-    startCommand: gunicorn main:app
+    startCommand: gunicorn main:app --timeout 120
     envVars:
       - key: RENDER
         value: true
 
-startCommand: gunicorn main:app --timeout 120
+

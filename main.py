@@ -12,12 +12,16 @@ import subprocess
 
 app = Flask(__name__)
 
+
 if os.environ.get('RENDER'):  # Custom flag for Render (you can set this in env vars)
     UPLOAD_FOLDER = '/tmp/uploads'
     OUTPUT_FOLDER = '/tmp/output'
 else:
     UPLOAD_FOLDER = os.path.abspath('uploads')
     OUTPUT_FOLDER = os.path.abspath('output')
+
+os.makedirs(UPLOAD_FOLDER, exist_ok=True)
+os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route("/")

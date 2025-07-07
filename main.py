@@ -8,9 +8,13 @@ from werkzeug.utils import secure_filename
 import zipfile
 import os
 import subprocess
+import platform
 
 
 app = Flask(__name__)
+
+
+gs_cmd = 'gswin64c' if platform.system() == 'Windows' else 'gs'
 
 
 if os.environ.get('RENDER'):  # Custom flag for Render (you can set this in env vars)
@@ -77,7 +81,7 @@ def pdf_merger(name):
             input_files = os.listdir(UPLOAD_FOLDER)
             #Ghost Command
             command = [
-               "gswin64c",
+               gs_cmd,
                "-sDEVICE=pdfwrite",
                "-dBATCH",
                "-dQUIET",
@@ -118,7 +122,7 @@ def pdf_compress(name):
               # Pdf compresser 
           
                 command = [
-                   "gswin64c",
+                   gs_cmd,
                    "-sDEVICE=pdfwrite",
                    "-dCompatibilityLevel=1.4",
                    f"-dPDFSETTINGS={quality}",
@@ -157,7 +161,7 @@ def pdf_splitt(name):
                  file.save(Upload_path)
 
                  command = [
-                 "gswin64c",
+                 gs_cmd,
                  "-sDEVICE=pdfwrite",
                  "-dCompatibilityLevel=1.4",
                  "-dBATCH",
@@ -196,7 +200,7 @@ def pdf_PNG(name):
                 
           #Ghostscript command
                command = [
-                  "gswin64c",
+                  gs_cmd,
                   "-sDEVICE=png16m",
                   f"-r150",
                   f"-dDownScaleFactor=2",
@@ -238,7 +242,7 @@ def pdf_JPG(name):
                 
           #Ghostscript command
                command = [
-                  "gswin64c",
+                  gs_cmd,
                   "-sDEVICE=jpeg",
                   f"-r150",
                   f"-dDownScaleFactor=2",
@@ -280,7 +284,7 @@ def pdf_TIFF(name):
                 
           #Ghostscript command
                command = [
-                  "gswin64c",
+                  gs_cmd,
                   "-sDEVICE=tiff24nc",
                   "-r150",
                   "-dNOPAUSE",
@@ -325,7 +329,7 @@ def pdf_Locker(name):
                owner_pass = f"{user_pass}@135"
           #Ghostscript command
                command = [
-                  "gswin64c",
+                  gs_cmd,
                   "-sDEVICE=pdfwrite",
                   "-dCompatibilityLevel=1.4",
                   "-dPDFSETTINGS=/default",

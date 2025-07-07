@@ -11,3 +11,5 @@ services:
     envVars:
       - key: RENDER
         value: true
+
+startCommand: gunicorn main:app --timeout 120

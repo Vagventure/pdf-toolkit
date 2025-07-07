@@ -4,11 +4,13 @@ from flask import url_for , jsonify
 from flask import render_template
 from flask import request
 from flask import send_from_directory
+from flask import send_file
 from werkzeug.utils import secure_filename
 import zipfile
 import os
 import subprocess
 import platform
+import time
 from flask import after_this_request
 
 
@@ -149,12 +151,20 @@ def pdf_compress(name):
                    @after_this_request
                    def remove_file(response):
                        try:
+                           print("Cleaning up:", Output_path)
+                           print("Cleaning up:", Upload_path)
+                   
+                           time.sleep(1)  # Give time for Flask to release file
+                   
                            os.remove(Output_path)
                            os.remove(Upload_path)
+                   
+                           print("Cleanup successful.")
                        except Exception as e:
                            print("Cleanup failed:", e)
                        return response
-                   return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
+
+                   return send_file(Output_path, as_attachment=True, download_name=output_fileName, max_age=0, conditional=False)
 
                   
                 except subprocess.CalledProcessError as e:

@@ -150,9 +150,15 @@ function checkAndSubmitCompress() {
     xhr.responseType = "blob";
 
     xhr.upload.onprogress = e => {
+
         if (e.lengthComputable) {
             document.getElementById("upload-progress").value =
                 (e.loaded / e.total) * 100;
+            setInterval(() => {
+                sig = document.querySelector(".blinker")
+                sig.classList.toggle('hidden')
+
+            }, 500);
         }
     };
 
@@ -188,11 +194,7 @@ function checkAndSubmitCompress() {
 
     xhr.send(formData);
 
-    setInterval(() => {
-        sig = document.querySelector(".blinker")
-        sig.classList.toggle('hidden')
 
-    }, 500);
 }
 
 

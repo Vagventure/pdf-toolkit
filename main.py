@@ -11,9 +11,15 @@ import subprocess
 
 
 app = Flask(__name__)
-UPLOAD_FOLDER = os.path.abspath("uploads")
-OUTPUT_FOLDER = os.path.abspath("output")
 
+if os.environ.get('RENDER'):  # Custom flag for Render (you can set this in env vars)
+    UPLOAD_FOLDER = '/tmp/uploads'
+    OUTPUT_FOLDER = '/tmp/output'
+else:
+    UPLOAD_FOLDER = os.path.abspath('uploads')
+    OUTPUT_FOLDER = os.path.abspath('output')
+
+app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 @app.route("/")
 def hello_world():
     return render_template('index.html')
@@ -343,46 +349,3 @@ def pdf_Locker(name):
                  
     return jsonify(success=False, error="File upload failed"), 400
 
-
-# @app.route('/tools/<slug>')
-# def template(slug):
-    
-#     return render_template("tooljinja.html", name=escape(slug) , operation="compress pdf")
-
-
-# @app.route('/tools', methods=['POST'])
-# def upload_file():
-#         file = request.files['file']
-#         file.save(f"uploads/{secure_filename(file.filename)}")
-#         return render_template('tools.html')
-
-
-
-# @app.route("/user/<username>")
-# def hello_user(username):
-#    return f"<p>Hello, {escape(username)}</p>"
-
-# @app.route('/post/<int:post_id>')
-# def show_post(post_id):
-#     # show the post with the given id, the id is an integer
-#     return f'Post {post_id}'
-
-# @app.route('/path/<path:subpath>')
-# def show_subpath(subpath):
-#     # show the subpath after /path/
-#     return f'Subpath {escape(subpath)}'
-
-# @app.route('/projects/')
-# def projects():
-#     return 'The project page'
-
-# @app.route('/about')
-# def about():
-#     return 'The about page'
-
-# with app.test_request_context():
-#     print("---------------------------------")
-#     print(url_for('projects'))
-#     print(url_for('about', next='/'))
-#     print(url_for('hello_user', username='John Doe'))
-#     print("---------------------------------")

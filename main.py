@@ -9,6 +9,7 @@ import zipfile
 import os
 import subprocess
 import platform
+from flask import after_this_request
 
 
 app = Flask(__name__)
@@ -92,6 +93,15 @@ def pdf_merger(name):
             try:
                subprocess.run(command, check=True)
                print("Pdfs are successfully merged : ",output_fileName)
+               
+               @after_this_request
+               def remove_file(response):
+                   try:
+                       os.remove(Output_path)
+                       os.remove(Upload_path)
+                   except Exception as e:
+                       print("Cleanup failed:", e)
+                   return response
                return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
 
             except Exception as e:
@@ -136,7 +146,17 @@ def pdf_compress(name):
                 try:
                    subprocess.run(command, check=True)
                    print(f"Pdf successfully compressed to : {output_fileName}")
+                   @after_this_request
+                   def remove_file(response):
+                       try:
+                           os.remove(Output_path)
+                           os.remove(Upload_path)
+                       except Exception as e:
+                           print("Cleanup failed:", e)
+                       return response
                    return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
+
+                  
                 except subprocess.CalledProcessError as e:
                    print("Compression failed try again : ",e)  
                    return jsonify(success=False, error="Ghostscript processing failed."), 500
@@ -176,7 +196,16 @@ def pdf_splitt(name):
                 try:
                    subprocess.run(command, check=True)
                    print(f"Pdf successfully splitted from {Start_page}-{End_page} : ",output_fileName)
+                   @after_this_request
+                   def remove_file(response):
+                       try:
+                           os.remove(Output_path)
+                           os.remove(Upload_path)
+                       except Exception as e:
+                           print("Cleanup failed:", e)
+                       return response
                    return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
+
                 except subprocess.CalledProcessError as e:
                    print("Splitting failed try again : ",e)  
                    return jsonify(success=False, error="Ghostscript processing failed."), 500
@@ -220,7 +249,15 @@ def pdf_PNG(name):
                               full_path = os.path.join(OUTPUT_FOLDER,image)
                               zipf.write(full_path, arcname=image)
                   print(f"Photos zipped into: {output_fileName}")
-                  return send_from_directory(directory=OUTPUT_FOLDER, path="photos.zip", as_attachment= True)
+                  @after_this_request
+                  def remove_file(response):
+                      try:
+                          os.remove(Output_path)
+                          os.remove(Upload_path)
+                      except Exception as e:
+                          print("Cleanup failed:", e)
+                      return response
+                  return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
 
                except subprocess.CalledProcessError as e:
                   print("Conversion failed try again: ",e)    
@@ -262,7 +299,16 @@ def pdf_JPG(name):
                               full_path = os.path.join(OUTPUT_FOLDER,image)
                               zipf.write(full_path, arcname=image)
                   print(f"Photos zipped into: {output_fileName}")
-                  return send_from_directory(directory=OUTPUT_FOLDER, path="photos.zip", as_attachment= True)
+                  @after_this_request
+                  def remove_file(response):
+                      try:
+                          os.remove(Output_path)
+                          os.remove(Upload_path)
+                      except Exception as e:
+                          print("Cleanup failed:", e)
+                      return response
+                  return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
+
 
                except subprocess.CalledProcessError as e:
                   print("Conversion failed try again: ",e)    
@@ -303,7 +349,16 @@ def pdf_TIFF(name):
                               full_path = os.path.join(OUTPUT_FOLDER,image)
                               zipf.write(full_path, arcname=image)
                   print(f"Photos zipped into: {output_fileName}")
-                  return send_from_directory(directory=OUTPUT_FOLDER, path="photos.zip", as_attachment= True)
+                  @after_this_request
+                  def remove_file(response):
+                      try:
+                          os.remove(Output_path)
+                          os.remove(Upload_path)
+                      except Exception as e:
+                          print("Cleanup failed:", e)
+                      return response
+                  return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
+
 
                except subprocess.CalledProcessError as e:
                   print("Conversion failed try again: ",e)    
@@ -350,7 +405,16 @@ def pdf_Locker(name):
                  print(f"Pdf is successfully locked : {output_fileName}")
                  print("Output path: ",Output_path)
                  print("Input Filename ",fileName)
+                 @after_this_request
+                 def remove_file(response):
+                     try:
+                         os.remove(Output_path)
+                         os.remove(Upload_path)
+                     except Exception as e:
+                         print("Cleanup failed:", e)
+                     return response
                  return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
+
                  
                except subprocess.CalledProcessError as e:
                  print("Process failed try again: ",e)           

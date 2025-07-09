@@ -32,8 +32,15 @@ os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
+
+
+def empty_dir(path):
+    [os.remove(os.path.join(path, f)) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
+
 @app.route("/")
 def hello_world():
+    empty_dir(UPLOAD_FOLDER)
+    empty_dir(OUTPUT_FOLDER)
     return render_template('index.html')
 
 @app.route("/tools/<slug>", methods=['GET','POST'])

@@ -9,16 +9,15 @@
 </head>
 
 <body>
-  <nav class="h-12 w-full p-2 bg-blue-500 flex justify-between font-medium font-serif">
-    <span class="text-2xl">PdfxFools</span>
+  <nav class="h-12 w-full p-2 bg-orange-300 flex justify-between font-medium font-serif">
+    <span class="text-2xl font-bold text-white">PdfxFools</span>
     <div class="space-x-2">
-      <span class="text-2xl cursor hover:underline">Home</span>
-      <span class="text-2xl cursor hover:underline">Tools</span>
+      <img src="{{url_for('static', filename='icons/HAm.svg')}}">
     </div>
   </nav>
 
-  <div class="container p-2 min-h-dvh bg-amber-100 flex flex-col justify-center items-center gap-5">
-    <div class="w-11/12 md:w-1/3 h-2/3 p-7 border-2 space-y-8 text-center">
+  <div class="container p-2 min-h-dvh bg-amber-50 flex flex-col justify-center items-center gap-5">
+    <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
       <div class="w-full h-1/3 flex items-center justify-center gap-5">
         <figure class="h-23 object-contain">
           <img class="w-full h-full"
@@ -34,12 +33,13 @@
         </figure>
       </div>
       <div class="space-y-1">
-        <button class="tools p-1.5 rounded-lg bg-blue-500 text-white cursor-pointer">Pdf Merger</button>
-        <p class="text-lg underline">Merge your Pdfs easily with the merge tool</p>
+        <button class="tools p-1.5 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">Pdf Merger</button>
+        <p class="text-[14px] md:text-lg">Easily combine multiple PDF files into a single, well-structured document
+          while preserving layout and quality.</p>
       </div>
     </div>
 
- <div class="w-11/12 md:w-1/3 h-2/3 p-7 border-2 space-y-8 text-center">
+    <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
       <div class="w-full h-1/3 flex items-center justify-center gap-5">
         <figure class="h-23 object-contain">
           <img class="w-full h-full"
@@ -55,12 +55,13 @@
         </figure>
       </div>
       <div class="space-y-1">
-        <button class="tools p-1.5 rounded-lg bg-blue-500 text-white cursor-pointer">Pdf Splitter</button>
-        <p class="text-lg underline">Split your Pdfs easily with the split tool</p>
+        <button class="tools p-1.5 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">Pdf Splitter</button>
+        <p class="text-[14px] md:text-lg">Split large PDFs into smaller files or extract specific pages with full
+          control and fast processing.</p>
       </div>
     </div>
 
- <div class="w-11/12 md:w-1/3 h-2/3 p-7 border-2 space-y-8 text-center">
+    <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
       <div class="w-full h-1/3 flex items-center justify-center gap-5">
         <figure class="h-23 object-contain"><img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
@@ -73,12 +74,13 @@
         </figure>
       </div>
       <div class="space-y-1">
-        <button class="tools p-1.5 rounded-lg bg-blue-500 text-white cursor-pointer">Pdf Compresser</button>
-        <p class="text-lg underline">Compress your Pdfs easily with the compress tool</p>
+        <button class="tools p-1.5 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">Pdf Compresser</button>
+        <p class="text-[14px] md:text-lg">Reduce your PDF file size without losing quality—perfect for faster uploads,
+          sharing, and saving storage space.</p>
       </div>
     </div>
 
- <div class="w-11/12 md:w-1/3 h-2/3 p-7 border-2 space-y-8 text-center">
+    <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
       <div class="w-full h-1/3 flex items-center justify-center gap-5">
         <figure class="h-23 object-contain"><img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
@@ -91,12 +93,13 @@
         </figure>
       </div>
       <div class="space-y-1">
-        <button class="tools p-1.5 rounded-lg bg-blue-500 text-white cursor-pointer">Pdf to PNG</button>
-        <p class="text-lg underline">Convert your Pdf into png images</p>
+        <button class="tools p-1.5 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">Pdf to PNG</button>
+        <p class="text-[14px] md:text-lg">Turn PDFs into crystal-clear PNG images, ideal for designs, transparency, and
+          digital use.</p>
       </div>
     </div>
 
- <div class="w-11/12 md:w-1/3 h-2/3 p-7 border-2 space-y-8 text-center">
+    <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
       <div class="w-full h-1/3 flex items-center justify-center gap-5">
         <figure class="h-23 object-contain"><img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
@@ -109,12 +112,13 @@
         </figure>
       </div>
       <div class="space-y-1">
-        <button class="tools p-1.5 rounded-lg bg-blue-500 text-white cursor-pointer">Pdf to JPG</button>
-        <p class="text-lg underline">Convert your Pdf into jpg images</p>
+        <button class="tools p-1.5 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">Pdf to JPG</button>
+        <p class="text-[14px] md:text-lg">Convert PDF pages to sharp, high-resolution JPG images suitable for sharing,
+          previews, or web use.</p>
       </div>
     </div>
 
- <div class="w-11/12 md:w-1/3 h-2/3 p-7 border-2 space-y-8 text-center">
+    <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
       <div class="w-full h-1/3 flex items-center justify-center gap-5">
         <figure class="h-23 object-contain"><img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
@@ -127,12 +131,13 @@
         </figure>
       </div>
       <div class="space-y-1">
-        <button class="tools p-1.5 rounded-lg bg-blue-500 text-white cursor-pointer">Pdf to TIFF</button>
-        <p class="text-lg underline">Convert your Pdf into tiff images</p>
+        <button class="tools p-1.5 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">Pdf to TIFF</button>
+        <p class="text-[14px] md:text-lg">Generate high-quality TIFF images from your PDFs, perfect for printing,
+          scanning, or archiving.</p>
       </div>
     </div>
 
- <div class="w-11/12 md:w-1/3 h-2/3 p-7 border-2 space-y-8 text-center">
+    <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
       <div class="w-full h-1/3 flex items-center justify-center gap-5">
         <figure class="h-23 object-contain"><img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
@@ -145,26 +150,127 @@
         </figure>
       </div>
       <div class="space-y-1">
-        <button class="tools p-1.5 rounded-lg bg-blue-500 text-white cursor-pointer">Pdf Encryptor</button>
-        <p class="text-lg underline">Secure your pdf using encryption</p>
+        <button class="tools p-1.5 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">Pdf Encryptor</button>
+        <p class="text-[14px] md:text-lg">Add strong password protection to your PDFs to prevent unauthorized access,
+          copying, or editing.
+        <p>
       </div>
     </div>
 
+    <div class="about container p-2 min-auto bg-orange-200 flex flex-col justify-center items-center gap-5">
+      <div class="w-full md:w-1/3 h-auto p-5 bg-orange-300 space-y-2">
+        <p class="text-2xl text-center text-white font-bold">Smarter PDFs with PDFxFools</p>
+        <p class="text-center">From merging to locking, we’ve got brainy tools that do the heavy lifting—so you don’t
+          have to lift a finger. Clean, fast, and actually useful—no foolin’.</p>
+      </div>
+      <div class="w-11/12 md:w-1/3 h-auto p-5 bg-white outline-1 rounded-2xl space-y-2 ">
+        <img width="35" src="{{url_for('static', filename='icons/square-lock.svg')}}">
+        <div class="text-2xl font-bold">100% Secure</div>
+        <span class="text-lg">Your files are protected with top-level encryption for complete peace of mind.</span>
+      </div>
 
-  </div>
+      <div class="w-11/12 md:w-1/3 h-auto p-5 bg-white outline-1 rounded-2xl space-y-2">
+        <img width="35" src="{{url_for('static', filename='icons/checkmark.svg')}}">
+        <div class="text-2xl font-bold">No Watermarkse</div>
+        <span class="text-lg">Download clean, professional results, no annoying watermarks ever.</span>
+      </div>
 
-<script>
+      <div class="w-11/12 md:w-1/3 h-auto p-5 bg-white outline-1 rounded-2xl space-y-2">
+        <img width="35" src="{{url_for('static', filename='icons/smart-phone.svg')}}">
+        <div class="text-2xl font-bold">Mobile Friendly</div>
+        <span class="text-lg">Access and use all features seamlessly on any mobile device.</span>
+      </div>
 
-   document.querySelectorAll(".tools").forEach(e => {
+      <div class="w-11/12 md:w-1/3 h-auto p-5 bg-white outline-1 rounded-2xl space-y-2">
+        <img width="35" src="{{url_for('static', filename='icons/cloud.svg')}}">
+        <div class="text-2xl font-bold">Cloud based</div>
+        <span class="text-lg">No installs needed—access your tools anytime, anywhere, directly from the cloud.</span>
+      </div>
+    </div>
+
+    <div class="FAQs container p-2 min-auto bg-orange-200 flex flex-col justify-center items-center gap-3">
+      <div class="w-full md:w-1/3 h-auto p-1 text-2xl text-white font-bold">
+        Frequently asked questions
+      </div>
+      
+    </div>
+
+
+    <script>
+
+      const faqs = [
+        {
+          question: "Is PDFxFools really free to use?",
+          answer: "Absolutely! No hidden fees, no signups, no gotchas. Just click, upload, and go. Foolishly simple."
+        },
+        {
+          question: "Will my files be safe here?",
+          answer: "Yes! We don’t snoop. Your files are encrypted, processed securely, and automatically deleted shortly after you're done."
+        },
+        {
+          question: "Why should I trust a site called 'PDFxFools'?",
+          answer: "Because we may be fools—but only for making awesome PDF tools free and easy to use. We take your PDFs seriously, even if our name says otherwise."
+        },
+        {
+          question: "Are there any limits on file size or number of files?",
+          answer: "We support most everyday files just fine. For huge files, your browser might tap out before we do. Try it and see—we dare you."
+        },
+        {
+          question: "Do I need to install anything?",
+          answer: "Nope. PDFxFools is fully cloud-based. No installs, no extensions—just magic in your browser."
+        },
+        {
+          question: "Will there be watermarks on my files?",
+          answer: "Never. We hate those too. Your output is clean, pro-grade, and totally yours."
+        }
+      ];
+
+
+
+      //Faq Questions 
+      let faq = document.querySelector(".FAQs")
+      for (let index = 0; index < faqs.length; index++) {
+        const e = faqs[index];
+        let div = document.createElement('div')
+        div.className = 'w-full h-auto p-2 bg-white outline-1 rounded-2xl text-lg'
+        div.innerHTML += ` 
+                      <button class="faq-question w-full h-auto flex justify-between items-center ">
+                          <span class="text-start"> ${e.question}</span>
+                          <svg width="28" height="28" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg">
+                              <path d="M12 4V20" stroke="#141B34" stroke-width="1.5" stroke-linecap="round"
+                                  stroke-linejoin="round" />
+                              <path d="M4 12H20" stroke="#141B34" stroke-width="1.5" stroke-linecap="round"
+                                  stroke-linejoin="round" />
+  
+                          </svg>
+                      </button>
+                      <div class="faq-answer hidden mt-2 transition-all duration-1000 ease-in-out">
+                        ${e.answer}
+                      </div>
+                  `
+
+              faq.appendChild(div)
+
+      }
+
+      
+document.querySelectorAll(".faq-question").forEach(button => {
+  button.addEventListener('click', () => {
+    const ans = button.nextElementSibling;
+
+    ans.classList.toggle('hidden');
+  });
+})
+      document.querySelectorAll(".tools").forEach(e => {
         e.addEventListener('click', (p) => {
-            let text = p.target.innerText.trim();  // or e.innerText
-            console.log(text);
-            window.open(`/tools/${encodeURIComponent(text)}`, '_blank')
+          let text = p.target.innerText.trim();  // or e.innerText
+          console.log(text);
+          window.open(`/tools/${encodeURIComponent(text)}`, '_blank')
 
         })
-    })
+      })
 
-</script>
+    </script>
 </body>
 
 </html>

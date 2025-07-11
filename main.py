@@ -10,7 +10,7 @@ import zipfile
 import os
 import subprocess
 import platform
-import time
+from PIL import Image
 from flask import after_this_request
 
 
@@ -51,6 +51,9 @@ def pdf_tool(slug):
        
        case "Pdf Merger":
            return pdf_merger(op)
+        
+       case "Images to Pdf":
+           return Img_pdf(op)
         
        case "Pdf Compresser":
            return pdf_compress(op)
@@ -110,7 +113,29 @@ def pdf_merger(name):
                return jsonify(success=False, error="Ghostscript processing failed."), 500
 
     return jsonify(success=False, error="File upload failed"), 400  
-    
+
+def Img_pdf(name): 
+    if request.method == 'GET':
+        return render_template("tooljinja.html", name=name, operation="generate pdf")
+
+    if request.method == 'POST':
+        uploaded_files = request.files.getlist('files[]')
+
+        if uploaded_files:
+            image_list = []
+            for file in uploaded_files:
+                img = Image.open(file).convert("RGB")
+                image_list.append(img)
+
+            output_fileName = "Processed_Pdf.pdf"
+            Output_path = os.path.join(OUTPUT_FOLDER, output_fileName)
+
+            # Save all images into a single PDF
+            image_list[0].save(Output_path, save_all=True, append_images=image_list[1:])
+
+            return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment=True)
+
+    return jsonify(success=False, error="File upload failed"), 400
 
 
 def pdf_compress(name):

@@ -9,16 +9,15 @@
 </head>
 
 <body>
-    <nav class="h-12 w-full p-2 bg-blue-500 flex justify-between font-medium font-serif">
-        <span class="text-2xl">PdfxFools</span>
+    <nav class="h-12 w-full p-2 bg-orange-300 flex justify-between font-medium font-serif">
+        <span class="text-2xl font-bold text-white">PdfxFools</span>
         <div class="space-x-2">
-            <span class="text-2xl cursor hover:underline">Home</span>
-            <span class="text-2xl cursor hover:underline">Tools</span>
+            <img src="{{url_for('static', filename='icons/HAm.svg')}}">
         </div>
     </nav>
-    <div class="container p-2 min-h-screen bg-amber-100 flex justify-center items-center">
-        <div class="w-11/12 h-96 space-y-3 md:w-2/3 md:h-80 p-7 border-2 md:space-y-2 text-center">
 
+    <div class="container p-2 mt-3 min-h-screen bg-amber-50 flex justify-center">
+       <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
             <div class="w-full h-1/2 flex items-center justify-center gap-5">
                 <figure class="h-24 w-[100px] object-contain">
                     <img class="w-full h-full"
@@ -26,10 +25,10 @@
                     <figcaption>Input Pdf</figcaption>
                 </figure>
 
-                <img class="relative" src="{{url_for('static', filename='icons/convert.svg')}}" alt="convert icon">
-                <img class="blinker absolute ml-0.5 hidden" src="{{url_for('static', filename='icons/convert r.svg')}}"
+                <img width="30" class="relative" src="{{url_for('static', filename='icons/convert.svg')}}" alt="convert icon">
+                <img width="30" class="blinker absolute ml-0.5 hidden" src="{{url_for('static', filename='icons/convert r.svg')}}"
                     alt="convert r icon">
-                <img class="blinker2 absolute ml-0.5 hidden" src="{{url_for('static', filename='icons/convert g.svg')}}"
+                <img width="30" class="blinker2 absolute ml-0.5 hidden" src="{{url_for('static', filename='icons/convert g.svg')}}"
                     alt="convert g icon">
 
                 <figure class="h-24 w-[100px] object-contain">
@@ -40,7 +39,7 @@
                 </figure>
             </div>
             <form class="option" method="POST" action="/tools/{{name}}" enctype="multipart/form-data">
-                <label for="file-upload" class="p-1 rounded-lg bg-green-400 text-white cursor-pointer">
+                <label for="file-upload" class="p-1 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">
                     Upload File
                 </label>
                 <div class="flex flex-col items-center ">
@@ -50,11 +49,11 @@
                 </div>
             </form>
             <div class=" w-full h-2/3 space-y-1">
-                <p class="text-lg underline">Compress your Pdfs easily with the compress tool</p>
+                <p class="text-lg">Compress your Pdfs easily with the compress tool</p>
             </div>
         </div>
         <script src="{{url_for('static', filename='script.js')}}"></script>
-       
+
 </body>
 
 </html>

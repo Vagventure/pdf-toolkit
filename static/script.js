@@ -239,7 +239,7 @@ function checkAndSubmitNormal() {
             const blob = xhr.response;
             const cd = xhr.getResponseHeader("Content-Disposition") || "";
             const m = /filename="?(.+)"?/.exec(cd);
-            const fname = m ? m[1] : "locked.pdf";
+            const fname = m ? m[1] : "merged.pdf";
 
             const url = URL.createObjectURL(blob);
             const a = document.createElement("a");
@@ -271,16 +271,16 @@ switch (op) {
     case "Pdf Splitter":
         let box = document.querySelector(".option")
         box.innerHTML = `
-                                     <label for="file-upload" class="p-1 rounded-lg bg-green-400 text-white cursor-pointer">
+                                     <label for="file-upload" class="p-1 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">
                                      Upload File
                                      </label>
                                      <div class="flex flex-col items-center">
                                          <input id="file-upload" class="hidden" type="file" name="files[]" onChange= checkAndSubmit() multiple/>
                                          
                                         <div class="options w-auto mx-auto mt-3 items-center justify-center flex gap-7 h-auto"> <input
-                                                 class="bg-white text-black w-32 font-medium" id="start" type="text" placeholder="Start Page"
+                                                 class="outline-1 text-center text-black w-32 font-medium " id="start" type="text" placeholder="Start Page"
                                                  name="start-page" onChange= checkAndSubmit()>
-                                             <input class="bg-white text-black w-32 font-medium" id="end" type="text" placeholder="End Page"
+                                             <input class="outline-1 text-center text-black w-32 font-medium " id="end" type="text" placeholder="End Page"
                                                  name="end-page" onChange= checkAndSubmit()>
                                          </div>
                                          <progress id="upload-progress" value="0" max="100" class="w-1/3 mt-3"></progress>
@@ -292,14 +292,14 @@ switch (op) {
     case "Pdf Encryptor":
         let box1 = document.querySelector(".option")
         box1.innerHTML = `
-                                     <label for="file-upload" class="p-1 rounded-lg bg-green-400 text-white cursor-pointer">
+                                     <label for="file-upload" class="p-1 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">
                                      Upload File
                                      </label>
                                      <div class="flex flex-col items-center">
                                          <input id="file-upload" class="hidden" type="file" name="files[]" onChange= checkAndSubmitEncrypt() multiple />
                                          
                                         <div class="options w-auto mx-auto mt-3 items-center justify-center flex gap-7 h-auto"> <input
-                                                 class="bg-white text-black w-32 font-medium" id="pass" type="text" placeholder="Password"
+                                                 class="bg-white outline-1 text-center text-black w-32 font-medium" id="pass" type="text" placeholder="Password"
                                                  name="code" onChange= checkAndSubmitEncrypt()>
                                          </div>
                                          <progress id="upload-progress" value="0" max="100" class="w-1/3 mt-3"></progress>
@@ -311,7 +311,7 @@ switch (op) {
     case "Pdf Compresser":
         let box2 = document.querySelector(".option")
         box2.innerHTML = `
-                                     <label for="file-upload" class="p-1 rounded-lg bg-green-400 text-white cursor-pointer">
+                                     <label for="file-upload" class="p-1 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">
                                      Upload File
                                      </label>
                                      <div class="flex flex-col items-center">

@@ -120,6 +120,9 @@ def Img_pdf(name):
 
     if request.method == 'POST':
         uploaded_files = request.files.getlist('files[]')
+        output_fileName = "Processed_Pdf.pdf"
+        Output_path = os.path.join(OUTPUT_FOLDER, output_fileName)
+
 
         if uploaded_files:
             image_list = []
@@ -127,9 +130,7 @@ def Img_pdf(name):
                 img = Image.open(file).convert("RGB")
                 image_list.append(img)
 
-            output_fileName = "Processed_Pdf.pdf"
-            Output_path = os.path.join(OUTPUT_FOLDER, output_fileName)
-
+            
             # Save all images into a single PDF
             image_list[0].save(Output_path, save_all=True, append_images=image_list[1:])
 

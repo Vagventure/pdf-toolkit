@@ -46,6 +46,19 @@ def hello_world():
 @app.route("/tools/<slug>", methods=['GET','POST'])
 def pdf_tool(slug):
     op = escape(slug)
+
+    if request.method == 'POST':
+        img1 = request.form.get("img1")
+        caption1 = request.form.get("caption1")
+        img2 = request.form.get("img2")
+        caption2 = request.form.get("caption2")
+        description = request.form.get("description")
+
+        # Pass this data to your Jinja template
+        return render_template("tooljinja.html", name=op,
+                               img1=img1, caption1=caption1,
+                               img2=img2, caption2=caption2,
+                               description=description)
    
     match(op):
        
@@ -78,7 +91,7 @@ def pdf_tool(slug):
 
 def pdf_merger(name): 
     if request.method == 'GET':
-             return render_template("tooljinja.html", name=name , operation="compress pdf")
+             return render_template("tooljinja.html", name=name , operation="Merged pdf")
 
     if request.method == 'POST':
             uploaded_files = request.files.getlist('files[]')
@@ -116,7 +129,7 @@ def pdf_merger(name):
 
 def Img_pdf(name): 
     if request.method == 'GET':
-        return render_template("tooljinja.html", name=name, operation="generate pdf")
+        return render_template("tooljinja.html", name=name, operation="Generated pdf")
 
     if request.method == 'POST':
         uploaded_files = request.files.getlist('files[]')
@@ -141,7 +154,7 @@ def Img_pdf(name):
 
 def pdf_compress(name):
          if request.method == 'GET':
-             return render_template("tooljinja.html", name=name , operation="compress pdf")
+             return render_template("tooljinja.html", name=name , operation="Compressed pdf")
         
          if request.method == 'POST':
              uploaded_files = request.files.getlist('files[]')
@@ -184,7 +197,7 @@ def pdf_compress(name):
               
 def pdf_splitt(name):
    if request.method == 'GET':
-       return render_template("tooljinja.html", name=name , operation="splitt pdf")
+       return render_template("tooljinja.html", name=name , operation="Splitted pdf")
    
    if request.method == 'POST':
              uploaded_files = request.files.getlist('files[]')
@@ -354,7 +367,7 @@ def pdf_TIFF(name):
 
 def pdf_Locker(name):
     if request.method == 'GET':
-             return render_template("tooljinja.html", name=name , operation="Pdf Locker")
+             return render_template("tooljinja.html", name=name)
 
     if request.method == 'POST':
             uploaded_files = request.files.getlist('files[]')

@@ -14,17 +14,17 @@
     <div class="space-x-2">
       <img class="relative burger cursor-pointer" src="{{url_for('static', filename='icons/HAm.svg')}}">
       <div
-        class="ham w-30 h-[95vh] p-3 bg-amber-50 border-2 z-10 absolute right-0 top-12 text-black hidden transition-all duration-1000 ease-in-out flex flex-col justify-between ">
+        class="ham w-30 h-[95vh] p-3 bg-amber-50 outline-1 z-10 absolute right-0 top-12 text-black hidden transition-all duration-1000 ease-in-out flex flex-col justify-between ">
         <div>
           <span class="text-center underline text-lg font-bold">Navigation</span>
-        <ul class="text-black text-[14px] font-normal text-start space-y-2">
-          <li class="cursor-pointer hover:underline">Home</li>
-          <li class="cursor-pointer hover:underline">About</li>
-          <li id="tools" class="cursor-pointer hover:underline">Tools</li>
-          <li id="feature" class="cursor-pointer hover:underline">Features</li>
-          <li id="questions" class="cursor-pointer hover:underline">FAQ</li>
-          <li id="questions" class="cursor-pointer hover:underline">Contact</li>
-        </ul>
+          <ul class="text-black text-[14px] font-normal text-start space-y-2">
+            <li class="cursor-pointer hover:underline">Home</li>
+            <li class="cursor-pointer hover:underline">About</li>
+            <li id="tools" class="cursor-pointer hover:underline">Tools</li>
+            <li id="feature" class="cursor-pointer hover:underline">Features</li>
+            <li id="questions" class="cursor-pointer hover:underline">FAQ</li>
+            <li id="questions" class="cursor-pointer hover:underline">Contact</li>
+          </ul>
         </div>
         <div class="mb-2.5">
           <div class="text-lg font-bold underline">PdfxFools</div>
@@ -35,15 +35,15 @@
   </nav>
 
   <div class="main container p-2 min-h-dvh bg-amber-50 flex flex-col justify-center items-center gap-5">
-    <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
-      <div class="w-full h-1/3 flex items-center justify-center gap-5">
-       <figure class="w-23 object-contain text-center">
+    <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+      <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
+        <figure class="w-23 object-contain text-center">
           <img class="w-full h-full" src="https://cdn3.iconfinder.com/data/icons/file-formats-part-1/1000/PNG-512.png">
           <figcaption>Images</figcaption>
         </figure>
 
         <img width="30" src="{{url_for('static', filename='icons/convert.svg')}}" alt="convert icon">
-       <figure class="w-23 object-contain text-center">
+        <figure class="w-23 object-contain text-center">
           <img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
           <figcaption>Pdf</figcaption>
@@ -54,17 +54,30 @@
         <p class="text-[14px] md:text-lg">Quickly merge multiple images into a single PDF while keeping their quality
           and layout intact—ideal for sharing or archiving.</p>
       </div>
+      <form method="POST" class="formsubmit" action="">
+        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Images">
+
+        <input type="hidden" name="img2"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption2" value="Pdf">
+
+        <input type="hidden" name="description" value="Quickly merge multiple images into a single PDF while keeping their quality
+          and layout intact—ideal for sharing or archiving.">
+
+      </form>
     </div>
-    <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
-      <div class="w-full h-1/3 flex items-center justify-center gap-5">
-       <figure class="w-23 object-contain text-center">
+ <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+      <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
+        <figure class="w-23 object-contain text-center">
           <img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
           <figcaption>Original Pdf</figcaption>
         </figure>
 
         <img width="30" src="{{url_for('static', filename='icons/convert.svg')}}" alt="convert icon">
-       <figure class="w-23 object-contain text-center">
+        <figure class="w-23 object-contain text-center">
           <img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
           <figcaption>Merged Pdf</figcaption>
@@ -75,18 +88,31 @@
         <p class="text-[14px] md:text-lg">Easily combine multiple PDF files into a single, well-structured document
           while preserving layout and quality.</p>
       </div>
+      <form method="POST" class="formsubmit" action="">
+        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption2" value="Merged Pdf">
+
+        <input type="hidden" name="description" value="Easily combine multiple PDF files into a single, well-structured document
+          while preserving layout and quality.">
+
+      </form>
     </div>
 
-    <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
-      <div class="w-full h-1/3 flex items-center justify-center gap-5">
-       <figure class="w-23 object-contain text-center">
+ <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+      <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
+        <figure class="w-23 object-contain text-center">
           <img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
           <figcaption>Original Pdf</figcaption>
         </figure>
 
         <img width="30" src="{{url_for('static', filename='icons/convert.svg')}}" alt="convert icon">
-       <figure class="w-23 object-contain text-center">
+        <figure class="w-23 object-contain text-center">
           <img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
           <figcaption>Splitted Pdf</figcaption>
@@ -97,18 +123,31 @@
         <p class="text-[14px] md:text-lg">Split large PDFs into smaller files or extract specific pages with full
           control and fast processing.</p>
       </div>
+      <form method="POST" class="formsubmit" action="">
+        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption2" value="Splitted Pdf">
+
+        <input type="hidden" name="description" value="Split large PDFs into smaller files or extract specific pages with full
+          control and fast processing.">
+
+      </form>
     </div>
 
-    <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
-      <div class="w-full h-1/3 flex items-center justify-center gap-5">
+ <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+      <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
         <figure class="w-23 object-contain text-center"><img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
-            <figcaption>Original Pdf</figcaption>
-          </figure>
+          <figcaption>Original Pdf</figcaption>
+        </figure>
         <img width="30" src="{{url_for('static', filename='icons/convert.svg')}}" alt="convert icon">
-        <figure class="w-23 object-contain text-center"><img class="w-full h-full"
+        <figure class="w-23 object-contain text-center flex flex-col items-center"><img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
-          <figcaption>Compressed Pdf</figcaption>
+          <figcaption class="w-32">Compressed Pdf</figcaption>
         </figure>
       </div>
       <div class="space-y-1">
@@ -116,11 +155,24 @@
         <p class="text-[14px] md:text-lg">Reduce your PDF file size without losing quality—perfect for faster uploads,
           sharing, and saving storage space.</p>
       </div>
+      <form method="POST" class="formsubmit" action="">
+        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption2" value="Compressed Pdf">
+
+        <input type="hidden" name="description" value="Reduce your PDF file size without losing quality—perfect for faster uploads,
+          sharing, and saving storage space.">
+
+      </form>
     </div>
 
-    <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
-      <div class="w-full h-1/3 flex items-center justify-center gap-5">
-       <figure class="w-23 object-contain text-center"><img class="w-full h-full"
+ <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+      <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
+        <figure class="w-23 object-contain text-center"><img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
           <figcaption>Original Pdf</figcaption>
         </figure>
@@ -135,11 +187,25 @@
         <p class="text-[14px] md:text-lg">Turn PDFs into crystal-clear PNG images, ideal for designs, transparency, and
           digital use.</p>
       </div>
+      <form method="POST" class="formsubmit" action="">
+        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st2.depositphotos.com/47577860/46963/v/600/depositphotos_469635890-stock-illustration-file-format-png-icon.jpg">
+        <input type="hidden" name="caption2" value="PNGs">
+
+        <input type="hidden" name="description" value="Turn PDFs into crystal-clear PNG images, ideal for designs, transparency, and
+          digital use.">
+
+      </form>
+
     </div>
 
-    <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
-      <div class="w-full h-1/3 flex items-center justify-center gap-5">
-       <figure class="w-23 object-contain text-center"><img class="w-full h-full"
+ <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+      <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
+        <figure class="w-23 object-contain text-center"><img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
           <figcaption>Original Pdf</figcaption>
         </figure>
@@ -154,11 +220,24 @@
         <p class="text-[14px] md:text-lg">Convert PDF pages to sharp, high-resolution JPG images suitable for sharing,
           previews, or web use.</p>
       </div>
+      <form method="POST" class="formsubmit" action="">
+        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st.depositphotos.com/57803962/56363/v/600/depositphotos_563637420-stock-illustration-file-format-icon-vector-illustration.jpg">
+        <input type="hidden" name="caption2" value="JPGs">
+
+        <input type="hidden" name="description" value="Convert PDF pages to sharp, high-resolution JPG images suitable for sharing,
+          previews, or web use.">
+
+      </form>
     </div>
 
-    <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
-      <div class="w-full h-1/3 flex items-center justify-center gap-5">
-       <figure class="w-23 object-contain text-center"><img class="w-full h-full"
+ <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+      <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
+        <figure class="w-23 object-contain text-center"><img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
           <figcaption>Original Pdf</figcaption>
         </figure>
@@ -173,11 +252,24 @@
         <p class="text-[14px] md:text-lg">Generate high-quality TIFF images from your PDFs, perfect for printing,
           scanning, or archiving.</p>
       </div>
+      <form method="POST" class="formsubmit" action="">
+        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st4.depositphotos.com/1000507/23793/v/600/depositphotos_237931072-stock-illustration-tagged-image-file-format.jpg">
+        <input type="hidden" name="caption2" value="TIFFs">
+
+        <input type="hidden" name="description" value="Generate high-quality TIFF images from your PDFs, perfect for printing,
+          scanning, or archiving.">
+
+      </form>
     </div>
 
-    <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
-      <div class="w-full h-1/3 flex items-center justify-center gap-5">
-       <figure class="w-23 object-contain text-center"><img class="w-full h-full"
+ <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+      <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
+        <figure class="w-23 object-contain text-center"><img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
           <figcaption>Original Pdf</figcaption>
         </figure>
@@ -193,6 +285,19 @@
           copying, or editing.
         <p>
       </div>
+      <form method="POST" class="formsubmit" action="">
+        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st2.depositphotos.com/42596756/44437/v/600/depositphotos_444376980-stock-illustration-file-folders-vector-icon.jpg">
+        <input type="hidden" name="caption2" value="Locked Pdf">
+
+        <input type="hidden" name="description" value="Add strong password protection to your PDFs to prevent unauthorized access,
+          copying, or editing.">
+
+      </form>
     </div>
 
     <div id="about" class="container p-2 min-auto bg-orange-200 flex flex-col justify-center items-center gap-5">
@@ -322,9 +427,15 @@
       })
       document.querySelectorAll(".tools").forEach(e => {
         e.addEventListener('click', (p) => {
-          let text = p.target.innerText.trim();  // or e.innerText
-          console.log(text);
-          window.open(`/tools/${encodeURIComponent(text)}`, '_blank')
+          let text = p.target.innerText.trim();
+
+          let card = e.closest(".tool-card")
+          let form = card.querySelector(".formsubmit")
+          form.action = `/tools/${encodeURIComponent(text)}` // or e.innerText
+
+          form.target = "_blank";
+          form.submit();
+          // window.open(`/tools/${encodeURIComponent(text)}`, '_blank')
 
         })
       })

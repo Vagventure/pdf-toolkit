@@ -17,12 +17,12 @@
     </nav>
 
     <div class="container p-2 mt-3 min-h-screen bg-amber-50 flex justify-center">
-       <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl space-y-8 text-center">
-            <div class="w-full h-1/2 flex items-center justify-center gap-5">
-                <figure class="h-24 w-[100px] object-contain">
+       <div class="w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+            <div class="w-full h-1/2 mb-2 flex items-center justify-center gap-5">
+                <figure class="w-23 object-contain text-center">
                     <img class="w-full h-full"
-                        src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
-                    <figcaption>Input Pdf</figcaption>
+                        src={{img1}}>
+                    <figcaption>{{caption1}}</figcaption>
                 </figure>
 
                 <img width="30" class="relative" src="{{url_for('static', filename='icons/convert.svg')}}" alt="convert icon">
@@ -31,10 +31,10 @@
                 <img width="30" class="blinker2 absolute ml-0.5 hidden" src="{{url_for('static', filename='icons/convert g.svg')}}"
                     alt="convert g icon">
 
-                <figure class="h-24 w-[100px] object-contain">
+                <figure class="w-23 object-contain text-center flex flex-col items-center">
                     <img class="w-full h-full"
-                        src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
-                    <figcaption>{{operation}}</figcaption>
+                        src={{img2}}>
+                    <figcaption class="w-32">{{caption2}}</figcaption>
 
                 </figure>
             </div>
@@ -49,7 +49,7 @@
                 </div>
             </form>
             <div class=" w-full h-2/3 space-y-1">
-                <p class="text-lg">Compress your Pdfs easily with the compress tool</p>
+                <p class="text-lg">{{description}}</p>
             </div>
         </div>
         <script src="{{url_for('static', filename='script.js')}}"></script>

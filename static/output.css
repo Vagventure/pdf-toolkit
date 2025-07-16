@@ -304,6 +304,9 @@
   .w-23 {
     width: calc(var(--spacing) * 23);
   }
+  .w-28 {
+    width: calc(var(--spacing) * 28);
+  }
   .w-30 {
     width: calc(var(--spacing) * 30);
   }

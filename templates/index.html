@@ -14,21 +14,150 @@
     <div class="space-x-2">
       <img class="relative burger cursor-pointer" src="{{url_for('static', filename='icons/HAm.svg')}}">
       <div
-        class="ham w-30 h-[95vh] p-3 bg-amber-50 outline-1 z-10 absolute right-0 top-12 text-black hidden transition-all duration-1000 ease-in-out flex flex-col justify-between ">
+        class="ham w-44 h-[95vh] p-3 bg-amber-50 outline-1 z-10 absolute right-0 top-12 text-black hidden transition-all duration-1000 ease-in-out flex flex-col space-y-4">
         <div>
-          <span class="text-center underline text-lg font-bold">Navigation</span>
-          <ul class="text-black text-[14px] font-normal text-start space-y-2">
-            <li class="cursor-pointer hover:underline">Home</li>
-            <li class="cursor-pointer hover:underline">About</li>
-            <li id="tools" class="cursor-pointer hover:underline">Tools</li>
-            <li id="feature" class="cursor-pointer hover:underline">Features</li>
-            <li id="questions" class="cursor-pointer hover:underline">FAQ</li>
-            <li id="questions" class="cursor-pointer hover:underline">Contact</li>
+          <span class="text-center underline text-[16px] font-bold">Popular Tools</span>
+          <ul class="text-black text-[14px] font-normal text-start">
+            <li class="quick-tool cursor-pointer hover:underline flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 512 512">
+                <path fill="#ffb86a"
+                  d="M200 288H88c-21.4 0-32.1 25.8-17 41l32.9 31l-99.2 99.3c-6.2 6.2-6.2 16.4 0 22.6l25.4 25.4c6.2 6.2 16.4 6.2 22.6 0L152 408l31.1 33c15.1 15.1 40.9 4.4 40.9-17V312c0-13.3-10.7-24-24-24m112-64h112c21.4 0 32.1-25.9 17-41l-33-31l99.3-99.3c6.2-6.2 6.2-16.4 0-22.6L481.9 4.7c-6.2-6.2-16.4-6.2-22.6 0L360 104l-31.1-33C313.8 55.9 288 66.6 288 88v112c0 13.3 10.7 24 24 24m96 136l33-31.1c15.1-15.1 4.4-40.9-17-40.9H312c-13.3 0-24 10.7-24 24v112c0 21.4 25.9 32.1 41 17l31-32.9l99.3 99.3c6.2 6.2 16.4 6.2 22.6 0l25.4-25.4c6.2-6.2 6.2-16.4 0-22.6zM183 71.1L152 104L52.7 4.7c-6.2-6.2-16.4-6.2-22.6 0L4.7 30.1c-6.2 6.2-6.2 16.4 0 22.6L104 152l-33 31.1C55.9 198.2 66.6 224 88 224h112c13.3 0 24-10.7 24-24V88c0-21.3-25.9-32-41-16.9" />
+              </svg>
+              <span>Pdf Compresser</span>
+            </li>
+
+            <li class="quick-tool cursor-pointer hover:underline flex items-center"> <svg
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+                <defs>
+                  <mask id="ipSFileLock0">
+                    <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+                      <path fill="#fff" stroke="#fff"
+                        d="M10 44h28a2 2 0 0 0 2-2V14H30V4H10a2 2 0 0 0-2 2v36a2 2 0 0 0 2 2" />
+                      <path stroke="#fff" d="m30 4l10 10" />
+                      <path fill="#000" stroke="#000" d="M17 27h14v8H17z" />
+                      <path stroke="#000" d="M28 27v-4c0-1.657-1-4-4-4s-4 2.343-4 4v4" />
+                    </g>
+                  </mask>
+                </defs>
+                <path fill="#ffb86a" d="M0 0h48v48H0z" mask="url(#ipSFileLock0)" />
+              </svg><span>Pdf Encryptor</span>
+            </li>
+
+            <li class="quick-tool cursor-pointer hover:underline flex items-center">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+                <g fill="none" stroke="#ffb86a" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+                  <rect width="38" height="38" x="5" y="5" rx="3" />
+                  <path d="M19 19c2 3 2 7 0 10m17-15L21 24l15 10" />
+                  <circle cx="16" cy="16" r="4" />
+                  <circle cx="16" cy="32" r="4" />
+                </g>
+              </svg>
+              <span>Pdf Splitter</span>
+            </li>
+
+            <li class="quick-tool cursor-pointer hover:underline flex items-center"><svg
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
+                <path fill="#ffb86a"
+                  d="M27.425 6.09h-1.52V4.57h-1.52V3.04h-1.53V1.52h-1.52V0H3.045v32h25.91V7.62h-1.53Zm0 24.38H4.575V1.52h15.23v7.62h7.62Z" />
+                <path fill="#ffb86a"
+                  d="M19.805 19.81v-1.53h-1.52v1.53h-9.14v-1.53h-1.53V7.62h-1.52v16.76h1.52v-3.05h16.77v3.05h1.52V10.66h-1.52v7.62h-1.53v1.53z" />
+                <path fill="#ffb86a"
+                  d="M7.615 24.38h16.77v1.52H7.615Zm13.72-7.62h1.52v1.52h-1.52Zm-3.05-1.52h3.05v1.52h-3.05Zm-1.52 1.52h1.52v1.52h-1.52Zm-1.53-1.52h1.53v1.52h-1.53Zm-3.04-1.53h3.04v1.53h-3.04Zm-1.53 1.53h1.53v1.52h-1.53Zm-1.52 1.52h1.52v1.52h-1.52Zm0-7.62h3.05v3.05h-3.05Zm-1.53-3.05h9.15v1.53h-9.15Z" />
+              </svg><span>Images to Pdf</span></li>
           </ul>
         </div>
-        <div class="mb-2.5">
+
+        <div>
+          <span class="text-center underline text-[16px] font-bold">Image operations</span>
+          <ul class="text-black text-[14px] font-normal text-start">
+            <li class="quick-tool cursor-pointer hover:underline flex items-center"><svg
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 32 32">
+                <path fill="#ffb86a"
+                  d="M27.425 6.09h-1.52V4.57h-1.52V3.04h-1.53V1.52h-1.52V0H3.045v32h25.91V7.62h-1.53Zm0 24.38H4.575V1.52h15.23v7.62h7.62Z" />
+                <path fill="#ffb86a"
+                  d="M19.805 19.81v-1.53h-1.52v1.53h-9.14v-1.53h-1.53V7.62h-1.52v16.76h1.52v-3.05h16.77v3.05h1.52V10.66h-1.52v7.62h-1.53v1.53z" />
+                <path fill="#ffb86a"
+                  d="M7.615 24.38h16.77v1.52H7.615Zm13.72-7.62h1.52v1.52h-1.52Zm-3.05-1.52h3.05v1.52h-3.05Zm-1.52 1.52h1.52v1.52h-1.52Zm-1.53-1.52h1.53v1.52h-1.53Zm-3.04-1.53h3.04v1.53h-3.04Zm-1.53 1.53h1.53v1.52h-1.53Zm-1.52 1.52h1.52v1.52h-1.52Zm0-7.62h3.05v3.05h-3.05Zm-1.53-3.05h9.15v1.53h-9.15Z" />
+              </svg>
+              <span>Images to Pdf</span>
+            </li>
+
+            <li class="quick-tool cursor-pointer hover:underline flex items-center"><svg
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26">
+                <path fill="#ffb86a"
+                  d="M1 0C.449 0 0 .449 0 1v16c0 .551.449 1 1 1h16c.551 0 1-.449 1-1V1c0-.551-.449-1-1-1zm1 2h14v12H2zm17 .906v2.031l1.813.313L19 15.75V17c0 1.104-.897 2-2 2H6.406l12.688 2.188a1 1 0 0 0 1.156-.813l2.688-15.781a1 1 0 0 0-.813-1.157zM9 3.937c-1.151 0-2.125.792-2.125 2.282c0 .974.434 1.952 1.031 2.562c.234.61-.164.842-.25.875c-1.206.436-2.625 1.245-2.625 2.031v1.282h7.938v-1.281c0-.81-1.422-1.614-2.688-2.032c-.058-.019-.417-.18-.187-.875c.595-.61 1.062-1.593 1.062-2.562c0-1.49-1.005-2.282-2.156-2.282m14.406 3.97l-.343 1.968l.718.156l-2.75 11.688l-.406-.094a1.95 1.95 0 0 1-1.719.531L5.063 19.781L4.78 20.97a1.023 1.023 0 0 0 .75 1.218l15.563 3.657a1.023 1.023 0 0 0 1.218-.75L25.938 9.53c.127-.536-.18-1.091-.718-1.219l-1.813-.406z" />
+              </svg>
+              <span>Pdf to PNG</span>
+            </li>
+
+            <li class="quick-tool cursor-pointer hover:underline flex items-center"><svg
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26">
+                <path fill="#ffb86a"
+                  d="M1 0C.449 0 0 .449 0 1v16c0 .551.449 1 1 1h16c.551 0 1-.449 1-1V1c0-.551-.449-1-1-1zm1 2h14v12H2zm17 .906v2.031l1.813.313L19 15.75V17c0 1.104-.897 2-2 2H6.406l12.688 2.188a1 1 0 0 0 1.156-.813l2.688-15.781a1 1 0 0 0-.813-1.157zM9 3.937c-1.151 0-2.125.792-2.125 2.282c0 .974.434 1.952 1.031 2.562c.234.61-.164.842-.25.875c-1.206.436-2.625 1.245-2.625 2.031v1.282h7.938v-1.281c0-.81-1.422-1.614-2.688-2.032c-.058-.019-.417-.18-.187-.875c.595-.61 1.062-1.593 1.062-2.562c0-1.49-1.005-2.282-2.156-2.282m14.406 3.97l-.343 1.968l.718.156l-2.75 11.688l-.406-.094a1.95 1.95 0 0 1-1.719.531L5.063 19.781L4.78 20.97a1.023 1.023 0 0 0 .75 1.218l15.563 3.657a1.023 1.023 0 0 0 1.218-.75L25.938 9.53c.127-.536-.18-1.091-.718-1.219l-1.813-.406z" />
+              </svg>
+              <span>Pdf to JPG</span>
+            </li>
+
+            <li class="quick-tool cursor-pointer hover:underline flex items-center"><svg
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 26 26">
+                <path fill="#ffb86a"
+                  d="M1 0C.449 0 0 .449 0 1v16c0 .551.449 1 1 1h16c.551 0 1-.449 1-1V1c0-.551-.449-1-1-1zm1 2h14v12H2zm17 .906v2.031l1.813.313L19 15.75V17c0 1.104-.897 2-2 2H6.406l12.688 2.188a1 1 0 0 0 1.156-.813l2.688-15.781a1 1 0 0 0-.813-1.157zM9 3.937c-1.151 0-2.125.792-2.125 2.282c0 .974.434 1.952 1.031 2.562c.234.61-.164.842-.25.875c-1.206.436-2.625 1.245-2.625 2.031v1.282h7.938v-1.281c0-.81-1.422-1.614-2.688-2.032c-.058-.019-.417-.18-.187-.875c.595-.61 1.062-1.593 1.062-2.562c0-1.49-1.005-2.282-2.156-2.282m14.406 3.97l-.343 1.968l.718.156l-2.75 11.688l-.406-.094a1.95 1.95 0 0 1-1.719.531L5.063 19.781L4.78 20.97a1.023 1.023 0 0 0 .75 1.218l15.563 3.657a1.023 1.023 0 0 0 1.218-.75L25.938 9.53c.127-.536-.18-1.091-.718-1.219l-1.813-.406z" />
+              </svg>
+              <span>Pdf to TIFF</span>
+            </li>   
+          </ul>
+        </div>
+
+        <div>
+          <span class="text-center underline text-[16px] font-bold">Pdf Organizer</span>
+          <ul class="text-black text-[14px] font-normal text-start">
+            <li class="quick-tool cursor-pointer hover:underline flex items-center"><svg
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
+                <path fill="#ffb86a"
+                  d="M4 6H2v14c0 1.1.9 2 2 2h14v-2H4zm16-4H8c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2m0 14H8V4h12zm-7-1h2v-4h4V9h-4V5h-2v4H9v2h4z" />
+              </svg>
+              <span>Pdf Merger</span>
+            </li>
+
+            <li class="quick-tool cursor-pointer hover:underline flex items-center"><svg
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+                <g fill="none" stroke="#ffb86a" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+                  <rect width="38" height="38" x="5" y="5" rx="3" />
+                  <path d="M19 19c2 3 2 7 0 10m17-15L21 24l15 10" />
+                  <circle cx="16" cy="16" r="4" />
+                  <circle cx="16" cy="32" r="4" />
+                </g>
+              </svg>
+              <span>Pdf Splitter</span>
+            </li>              
+          </ul>
+        </div>
+
+        <div>
+          <span class="text-center underline text-[16px] font-bold">Pdf Security</span>
+          <ul class="text-black text-[14px] font-normal text-start">
+            <li class="quick-tool cursor-pointer hover:underline flex items-center"> <svg
+                xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 48 48">
+                <defs>
+                  <mask id="ipSFileLock0">
+                    <g fill="none" stroke-linecap="round" stroke-linejoin="round" stroke-width="4">
+                      <path fill="#fff" stroke="#fff"
+                        d="M10 44h28a2 2 0 0 0 2-2V14H30V4H10a2 2 0 0 0-2 2v36a2 2 0 0 0 2 2" />
+                      <path stroke="#fff" d="m30 4l10 10" />
+                      <path fill="#000" stroke="#000" d="M17 27h14v8H17z" />
+                      <path stroke="#000" d="M28 27v-4c0-1.657-1-4-4-4s-4 2.343-4 4v4" />
+                    </g>
+                  </mask>
+                </defs>
+                <path fill="#ffb86a" d="M0 0h48v48H0z" mask="url(#ipSFileLock0)" />
+              </svg>
+              <span>Pdf Encryptor</span>
+            </li>
+          </ul>
+        </div>
+        <div class="mb-2.5 absolute bottom-3.5">
           <div class="text-lg font-bold underline">PdfxFools</div>
-          <p class="text-[10px]">Your one stop guide to all pdf tools</p>
+          <p class="text-[12px]">Your one stop guide to all reliable Pdf tools</p>
         </div>
       </div>
     </div>
@@ -54,9 +183,9 @@
         <p class="text-[14px] md:text-lg">Quickly merge multiple images into a single PDF while keeping their quality
           and layout intact—ideal for sharing or archiving.</p>
       </div>
-      <form method="POST" class="formsubmit" action="">
+      <form method="POST" class="formsubmit Images-to-Pdf" action="">
         <input type="hidden" name="img1"
-          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+          value="https://cdn3.iconfinder.com/data/icons/file-formats-part-1/1000/PNG-512.png">
         <input type="hidden" name="caption1" value="Images">
 
         <input type="hidden" name="img2"
@@ -68,7 +197,7 @@
 
       </form>
     </div>
- <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+    <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
       <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
         <figure class="w-23 object-contain text-center">
           <img class="w-full h-full"
@@ -88,7 +217,7 @@
         <p class="text-[14px] md:text-lg">Easily combine multiple PDF files into a single, well-structured document
           while preserving layout and quality.</p>
       </div>
-      <form method="POST" class="formsubmit" action="">
+      <form method="POST" class="formsubmit Pdf-Merger" action="">
         <input type="hidden" name="img1"
           value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
         <input type="hidden" name="caption1" value="Original Pdf">
@@ -103,7 +232,7 @@
       </form>
     </div>
 
- <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+    <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
       <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
         <figure class="w-23 object-contain text-center">
           <img class="w-full h-full"
@@ -123,7 +252,7 @@
         <p class="text-[14px] md:text-lg">Split large PDFs into smaller files or extract specific pages with full
           control and fast processing.</p>
       </div>
-      <form method="POST" class="formsubmit" action="">
+      <form method="POST" class="formsubmit Pdf-Splitter" action="">
         <input type="hidden" name="img1"
           value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
         <input type="hidden" name="caption1" value="Original Pdf">
@@ -138,7 +267,7 @@
       </form>
     </div>
 
- <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+    <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
       <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
         <figure class="w-23 object-contain text-center"><img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
@@ -155,7 +284,7 @@
         <p class="text-[14px] md:text-lg">Reduce your PDF file size without losing quality—perfect for faster uploads,
           sharing, and saving storage space.</p>
       </div>
-      <form method="POST" class="formsubmit" action="">
+      <form method="POST" class="formsubmit Pdf-Compresser" action="">
         <input type="hidden" name="img1"
           value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
         <input type="hidden" name="caption1" value="Original Pdf">
@@ -170,7 +299,7 @@
       </form>
     </div>
 
- <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+    <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
       <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
         <figure class="w-23 object-contain text-center"><img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
@@ -187,7 +316,7 @@
         <p class="text-[14px] md:text-lg">Turn PDFs into crystal-clear PNG images, ideal for designs, transparency, and
           digital use.</p>
       </div>
-      <form method="POST" class="formsubmit" action="">
+      <form method="POST" class="formsubmit Pdf-to-PNG" action="">
         <input type="hidden" name="img1"
           value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
         <input type="hidden" name="caption1" value="Original Pdf">
@@ -203,7 +332,7 @@
 
     </div>
 
- <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+    <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
       <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
         <figure class="w-23 object-contain text-center"><img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
@@ -220,7 +349,7 @@
         <p class="text-[14px] md:text-lg">Convert PDF pages to sharp, high-resolution JPG images suitable for sharing,
           previews, or web use.</p>
       </div>
-      <form method="POST" class="formsubmit" action="">
+      <form method="POST" class="formsubmit Pdf-to-JPG" action="">
         <input type="hidden" name="img1"
           value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
         <input type="hidden" name="caption1" value="Original Pdf">
@@ -235,7 +364,7 @@
       </form>
     </div>
 
- <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+    <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
       <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
         <figure class="w-23 object-contain text-center"><img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
@@ -252,7 +381,7 @@
         <p class="text-[14px] md:text-lg">Generate high-quality TIFF images from your PDFs, perfect for printing,
           scanning, or archiving.</p>
       </div>
-      <form method="POST" class="formsubmit" action="">
+      <form method="POST" class="formsubmit Pdf-to-TIFF" action="">
         <input type="hidden" name="img1"
           value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
         <input type="hidden" name="caption1" value="Original Pdf">
@@ -267,7 +396,7 @@
       </form>
     </div>
 
- <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+    <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
       <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
         <figure class="w-23 object-contain text-center"><img class="w-full h-full"
             src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
@@ -285,7 +414,7 @@
           copying, or editing.
         <p>
       </div>
-      <form method="POST" class="formsubmit" action="">
+      <form method="POST" class="formsubmit Pdf-Encryptor" action="">
         <input type="hidden" name="img1"
           value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
         <input type="hidden" name="caption1" value="Original Pdf">
@@ -360,6 +489,7 @@
       <span class="text-[14px]">@PdfxFools 2025 All Rights Reserved</span>
     </div>
 
+    <script src="https://code.iconify.design/3/3.1.0/iconify.min.js"></script>
     <script>
 
       const faqs = [
@@ -447,16 +577,24 @@
         ham.classList.toggle('hidden')
       })
 
-      document.getElementById('feature').addEventListener('click', function () {
-        document.getElementById("about").scrollIntoView({ behavior: "smooth" });
+      // document.getElementById('feature').addEventListener('click', function () {
+      //   document.getElementById("about").scrollIntoView({ behavior: "smooth" });
+      // })
+
+      document.querySelectorAll(".quick-tool").forEach(e => {
+        e.addEventListener('click', (p) => {
+          let text = p.target.innerText.trim();
+          let form = document.querySelector(`.${text.replace(/\s+/g, "-")}`);
+          form.action = `/tools/${encodeURIComponent(text)}` // or e.innerText
+
+          form.target = "_blank";
+          form.submit();
+
+          // window.open(`/tools/${encodeURIComponent(text)}`, '_blank')
+        })
+
       })
 
-      document.getElementById('tools').addEventListener('click', function () {
-        document.querySelector(".main").scrollIntoView({ behavior: "smooth" });
-      })
-      document.getElementById('questions').addEventListener('click', function () {
-        document.querySelector(".FAQs").scrollIntoView({ behavior: "smooth" });
-      })  
     </script>
 </body>
 

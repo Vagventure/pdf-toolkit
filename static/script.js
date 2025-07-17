@@ -314,7 +314,7 @@ switch (op) {
                                      <label for="file-upload" class="p-1 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">
                                      Upload File
                                      </label>
-                                     <div class="flex flex-col items-center">
+                                     <div class="flex flex-col items-center justify-center">
                                          <input id="file-upload" class="hidden" type="file" name="files[]" onChange= checkAndSubmitCompress() multiple />
                                          
                                         <div class="options w-auto mx-auto mt-3 items-center justify-center flex gap-7 h-auto"> <select class="border-2 bg-white text-black" name="value" id="quality" onChange= checkAndSubmitCompress()>

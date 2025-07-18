@@ -331,3 +331,167 @@ switch (op) {
 
 
 }
+
+document.querySelector(".burger").addEventListener('click', () => {
+    ham = document.querySelector('.ham')
+    ham.classList.toggle('hidden')
+})
+
+
+document.querySelectorAll(".quick-tool").forEach(e => {
+    e.addEventListener('click', (p) => {
+        let text = p.target.innerText.trim();
+        let opr = text.replace(/\s+/g, "-")
+        console.log(opr);
+        let form = document.querySelector(".formsubmit");
+
+        switch (text) {
+            case "Pdf Merger":
+                form.classList.add = `${opr}`
+                form.action = `/tools/${encodeURIComponent(text)}`
+                form.innerHTML = `
+                <input type="hidden" name="img1"
+         value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption2" value="Merged Pdf">
+
+        <input type="hidden" name="description" value="Easily combine multiple PDF files into a single, well-structured document
+          while preserving layout and quality.">
+
+                `
+                break
+
+            case "Images to Pdf":
+                form.classList.add = `${opr}`
+                form.action = `/tools/${encodeURIComponent(text)}`
+                form.innerHTML = `
+                <input type="hidden" name="img1"
+          value="https://cdn3.iconfinder.com/data/icons/file-formats-part-1/1000/PNG-512.png">
+        <input type="hidden" name="caption1" value="Images">
+
+        <input type="hidden" name="img2"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption2" value="Pdf">
+
+        <input type="hidden" name="description" value="Quickly merge multiple images into a single PDF while keeping their quality
+          and layout intact—ideal for sharing or archiving.">
+
+                `
+                break
+
+            case "Pdf Splitter":
+                form.classList.add = `${opr}`
+                form.action = `/tools/${encodeURIComponent(text)}`
+                form.innerHTML = `
+                 <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption2" value="Splitted Pdf">
+
+        <input type="hidden" name="description" value="Split large PDFs into smaller files or extract specific pages with full
+          control and fast processing.">
+                `
+                break
+
+            case "Pdf Compresser":
+                form.classList.add = `${opr}`
+                form.action = `/tools/${encodeURIComponent(text)}`
+                form.innerHTML = `
+                        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption2" value="Compressed Pdf">
+
+        <input type="hidden" name="description" value="Reduce your PDF file size without losing quality—perfect for faster uploads,
+          sharing, and saving storage space.">
+
+                `
+                break
+
+            case "Pdf to PNG":
+                form.classList.add = `${opr}`
+                form.action = `/tools/${encodeURIComponent(text)}`
+                form.innerHTML = `
+                <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st2.depositphotos.com/47577860/46963/v/600/depositphotos_469635890-stock-illustration-file-format-png-icon.jpg">
+        <input type="hidden" name="caption2" value="PNGs">
+
+        <input type="hidden" name="description" value="Turn PDFs into crystal-clear PNG images, ideal for designs, transparency, and
+          digital use.">
+                `
+                break
+
+            case "Pdf to JPG":
+                form.classList.add = `${opr}`
+                form.action = `/tools/${encodeURIComponent(text)}`
+                form.innerHTML = `
+                <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st.depositphotos.com/57803962/56363/v/600/depositphotos_563637420-stock-illustration-file-format-icon-vector-illustration.jpg">
+        <input type="hidden" name="caption2" value="JPGs">
+
+        <input type="hidden" name="description" value="Convert PDF pages to sharp, high-resolution JPG images suitable for sharing,
+          previews, or web use.">
+                `
+                break
+
+            case "Pdf to TIFF":
+                form.classList.add = `${opr}`
+                form.action = `/tools/${encodeURIComponent(text)}`
+                form.innerHTML = `
+                        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st4.depositphotos.com/1000507/23793/v/600/depositphotos_237931072-stock-illustration-tagged-image-file-format.jpg">
+        <input type="hidden" name="caption2" value="TIFFs">
+
+        <input type="hidden" name="description" value="Generate high-quality TIFF images from your PDFs, perfect for printing,
+          scanning, or archiving.">
+
+                `
+                break
+
+            case "Pdf Encryptor":
+                form.classList.add = `${opr}`
+                form.action = `/tools/${encodeURIComponent(text)}`
+                form.innerHTML = `
+                
+                        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st2.depositphotos.com/42596756/44437/v/600/depositphotos_444376980-stock-illustration-file-folders-vector-icon.jpg">
+        <input type="hidden" name="caption2" value="Locked Pdf">
+
+        <input type="hidden" name="description" value="Add strong password protection to your PDFs to prevent unauthorized access,
+          copying, or editing.">`
+                break
+
+
+        }
+
+        form.target = "_blank";
+        form.submit();
+
+    })
+
+})

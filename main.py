@@ -43,23 +43,26 @@ def hello_world():
     empty_dir(OUTPUT_FOLDER)
     return render_template('index.html')
 
+
 @app.route("/tools/<slug>", methods=['GET','POST'])
 def pdf_tool(slug):
     op = escape(slug)
-
-    if request.method == 'POST':
-        img1 = request.form.get("img1")
-        caption1 = request.form.get("caption1")
-        img2 = request.form.get("img2")
-        caption2 = request.form.get("caption2")
-        description = request.form.get("description")
-
-        # Pass this data to your Jinja template
-        return render_template("tooljinja.html", name=op,
-                               img1=img1, caption1=caption1,
-                               img2=img2, caption2=caption2,
-                               description=description)
-   
+    if request.method == 'GET':
+        # pull your “metadata” out of request.args
+        img1       = request.args.get('img1')
+        img2       = request.args.get('img2')
+        caption1   = request.args.get('caption1')
+        caption2   = request.args.get('caption2')
+        description   = request.args.get('description')
+      
+        # … same for img2, caption2, description …
+        return render_template(
+            "tooljinja.html",
+            name=op,
+            img1=img1,caption1=caption1,
+            img2=img2,caption2=caption2,
+            description=description)
+     
     match(op):
        
        case "Pdf Merger":
@@ -86,7 +89,7 @@ def pdf_tool(slug):
        case "Pdf Encryptor":
            return pdf_Locker(op)
   
-    return render_template("tooljinja.html", name=op , operation="splitt pdf")      
+    # return render_template("tooljinja.html", name=op , operation="splitt pdf")      
          
 
 def pdf_merger(name): 
@@ -94,36 +97,36 @@ def pdf_merger(name):
              return render_template("tooljinja.html", name=name , operation="Merged pdf")
 
     if request.method == 'POST':
-            uploaded_files = request.files.getlist('files[]')
-            if uploaded_files:
-               for file in uploaded_files:
-                 fileName = secure_filename(file.filename)
-                 Upload_path = os.path.join(UPLOAD_FOLDER,fileName)
-                 output_fileName = f"Processed_{fileName}"
-                 Output_path = os.path.join(OUTPUT_FOLDER,output_fileName)
-                 
-                 file.save(Upload_path)
-                
-            input_files = [os.path.join(UPLOAD_FOLDER, f) for f in os.listdir(UPLOAD_FOLDER)]
-
-            #Ghost Command
-            command = [
-               gs_cmd,
-               "-sDEVICE=pdfwrite",
-               "-dBATCH",
-               "-dQUIET",
-               "-dNOPAUSE",
-               f"-sOutputFile={Output_path}"
-            ] + input_files
+        uploaded_files = request.files.getlist('files[]')
+        # Output_path = ""
+        if uploaded_files:
+           for file in uploaded_files:
+             fileName = secure_filename(file.filename)
+             Upload_path = os.path.join(UPLOAD_FOLDER,fileName)
+             output_fileName = f"Processed_{fileName}"
+             Output_path = os.path.join(OUTPUT_FOLDER,output_fileName)
+             
+             file.save(Upload_path)
             
-            try:
-               subprocess.run(command, check=True)
-               print("Pdfs are successfully merged : ",output_fileName)
-               return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
-
-            except Exception as e:
-               print("Merging failed try again : ",e) 
-               return jsonify(success=False, error="Ghostscript processing failed."), 500
+           input_files = [os.path.join(UPLOAD_FOLDER, f) for f in os.listdir(UPLOAD_FOLDER)]
+   
+        #Ghost Command
+        command = [
+           gs_cmd,
+           "-sDEVICE=pdfwrite",
+           "-dBATCH",
+           "-dQUIET",
+           "-dNOPAUSE",
+           f"-sOutputFile={Output_path}"
+        ] + input_files
+        
+        try:
+           subprocess.run(command, check=True)
+           print("Pdfs are successfully merged : ",output_fileName)
+           return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
+        except Exception as e:
+           print("Merging failed try again : ",e) 
+           return jsonify(success=False, error="Ghostscript processing failed."), 500
 
     return jsonify(success=False, error="File upload failed"), 400  
 

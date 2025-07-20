@@ -1,3 +1,27 @@
+window.addEventListener('DOMContentLoaded', () => {
+    const span = document.querySelector('.instructions span');
+    const ol = document.querySelector('.instructions ol');
+    if (span) {
+      span.classList.add('font-bold', 'text-lg', 'underline'); // or 'text-xl' for larger size
+    }
+    if(ol){
+        ol.classList.add('list-decimal', 'pl-5');
+    }
+  });
+
+
+const slider = document.getElementById('slider')
+const kids = slider.children;
+let current = 0;
+
+setInterval(() =>{
+current = (current + 1) % kids.length;
+let ScrollX = current * slider.clientWidth;
+slider.scrollTo({
+    left: ScrollX,
+    behavior: 'smooth'
+})
+}, 5000)
 
 function checkAndSubmit() {
     const start = document.getElementById("start").value.trim();

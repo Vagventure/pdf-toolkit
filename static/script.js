@@ -2,25 +2,25 @@ window.addEventListener('DOMContentLoaded', () => {
     const span = document.querySelector('.instructions span');
     const ol = document.querySelector('.instructions ol');
     if (span) {
-      span.classList.add('font-bold', 'text-lg', 'underline'); // or 'text-xl' for larger size
+        span.classList.add('font-bold', 'text-lg', 'underline'); // or 'text-xl' for larger size
     }
-    if(ol){
+    if (ol) {
         ol.classList.add('list-decimal', 'pl-5');
     }
-  });
+});
 
 
 const slider = document.getElementById('slider')
 const kids = slider.children;
 let current = 0;
 
-setInterval(() =>{
-current = (current + 1) % kids.length;
-let ScrollX = current * slider.clientWidth;
-slider.scrollTo({
-    left: ScrollX,
-    behavior: 'smooth'
-})
+setInterval(() => {
+    current = (current + 1) % kids.length;
+    let ScrollX = current * slider.clientWidth;
+    slider.scrollTo({
+        left: ScrollX,
+        behavior: 'smooth'
+    })
 }, 5000)
 
 function checkAndSubmit() {
@@ -362,7 +362,7 @@ document.querySelector(".burger").addEventListener('click', () => {
 })
 
 
-document.querySelectorAll(".quick-tool").forEach(e => {
+document.querySelectorAll(".quick-tool, .Reco-tool").forEach(e => {
     e.addEventListener('click', (p) => {
         let text = p.target.innerText.trim();
         let opr = text.replace(/\s+/g, "-")
@@ -371,7 +371,7 @@ document.querySelectorAll(".quick-tool").forEach(e => {
 
         switch (text) {
             case "Pdf Merger":
-                form.classList.add = `${opr}`
+                form.classList.add(opr)
                 form.action = `/tools/${encodeURIComponent(text)}`
                 form.innerHTML = `
                 <input type="hidden" name="img1"
@@ -389,7 +389,7 @@ document.querySelectorAll(".quick-tool").forEach(e => {
                 break
 
             case "Images to Pdf":
-                form.classList.add = `${opr}`
+                form.classList.add(opr)
                 form.action = `/tools/${encodeURIComponent(text)}`
                 form.innerHTML = `
                 <input type="hidden" name="img1"
@@ -407,7 +407,7 @@ document.querySelectorAll(".quick-tool").forEach(e => {
                 break
 
             case "Pdf Splitter":
-                form.classList.add = `${opr}`
+                form.classList.add(opr)
                 form.action = `/tools/${encodeURIComponent(text)}`
                 form.innerHTML = `
                  <input type="hidden" name="img1"
@@ -424,7 +424,7 @@ document.querySelectorAll(".quick-tool").forEach(e => {
                 break
 
             case "Pdf Compresser":
-                form.classList.add = `${opr}`
+                form.classList.add(opr)
                 form.action = `/tools/${encodeURIComponent(text)}`
                 form.innerHTML = `
                         <input type="hidden" name="img1"
@@ -442,7 +442,7 @@ document.querySelectorAll(".quick-tool").forEach(e => {
                 break
 
             case "Pdf to PNG":
-                form.classList.add = `${opr}`
+                form.classList.add(opr)
                 form.action = `/tools/${encodeURIComponent(text)}`
                 form.innerHTML = `
                 <input type="hidden" name="img1"
@@ -459,7 +459,7 @@ document.querySelectorAll(".quick-tool").forEach(e => {
                 break
 
             case "Pdf to JPG":
-                form.classList.add = `${opr}`
+                form.classList.add(opr)
                 form.action = `/tools/${encodeURIComponent(text)}`
                 form.innerHTML = `
                 <input type="hidden" name="img1"
@@ -476,7 +476,7 @@ document.querySelectorAll(".quick-tool").forEach(e => {
                 break
 
             case "Pdf to TIFF":
-                form.classList.add = `${opr}`
+                form.classList.add(opr)
                 form.action = `/tools/${encodeURIComponent(text)}`
                 form.innerHTML = `
                         <input type="hidden" name="img1"
@@ -494,7 +494,7 @@ document.querySelectorAll(".quick-tool").forEach(e => {
                 break
 
             case "Pdf Encryptor":
-                form.classList.add = `${opr}`
+                form.classList.add(opr)
                 form.action = `/tools/${encodeURIComponent(text)}`
                 form.innerHTML = `
                 

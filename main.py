@@ -6,6 +6,8 @@ from flask import request
 from flask import send_from_directory
 from flask import send_file
 from werkzeug.utils import secure_filename
+from pypdf import PdfWriter,PdfReader
+import fitz
 import zipfile
 import os
 import subprocess
@@ -54,6 +56,7 @@ def pdf_tool(slug):
         caption1   = request.args.get('caption1')
         caption2   = request.args.get('caption2')
         description   = request.args.get('description')
+  
       
         # … same for img2, caption2, description …
         return render_template(
@@ -88,6 +91,15 @@ def pdf_tool(slug):
        
        case "Pdf Encryptor":
            return pdf_Locker(op)
+       
+       case "Pdf Decryptor":
+           return pdf_unlocker(op)
+       
+       case "Pdf Rotator":
+           return pdf_rotator(op)
+       
+       case "Text Extractor":
+           return pdf_textext(op)
   
     # return render_template("tooljinja.html", name=op , operation="splitt pdf")      
          
@@ -414,6 +426,121 @@ def pdf_Locker(name):
                except subprocess.CalledProcessError as e:
                  print("Process failed try again: ",e)           
                  return jsonify(success=False, error="Ghostscript processing failed."), 500
+                 
+    return jsonify(success=False, error="File upload failed"), 400
+
+def pdf_unlocker(name):
+    if request.method == 'GET':
+             return render_template("tooljinja.html", name=name)
+
+    if request.method == 'POST':
+            uploaded_files = request.files.getlist('files[]')
+            if uploaded_files:
+               for file in uploaded_files:
+                 fileName = secure_filename(file.filename)
+                 Upload_path = os.path.join(UPLOAD_FOLDER,fileName)
+                 output_fileName = f"Unlocked_{fileName}"
+                 Output_path = os.path.join(OUTPUT_FOLDER,output_fileName)
+                 
+                 file.save(Upload_path)
+                
+               user_pass = request.form.get("code")
+
+          #Ghostscript command
+               command = [
+                  gs_cmd,
+                  "-sDEVICE=pdfwrite",
+                  "-dCompatibilityLevel=1.4",
+                  "-dPDFSETTINGS=/default",
+                  "-dNOPAUSE",
+                  "-dBATCH",
+                  "-dQUIET",
+                  f"-sPDFPassword={user_pass}",
+                  f"-sOutputFile={Output_path}",
+                  Upload_path
+                ]
+              
+               try:
+                 subprocess.run(command, check=True)
+                 print(f"Pdf is successfully Unlocked : {output_fileName}")
+                 print("Output path: ",Output_path)
+                 print("Input Filename ",fileName)
+                 return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
+
+                 
+               except subprocess.CalledProcessError as e:
+                 print("Process failed try again: ",e)           
+                 return jsonify(success=False, error="Ghostscript processing failed."), 500
+                 
+    return jsonify(success=False, error="File upload failed"), 400
+
+
+def pdf_rotator(name):
+    if request.method == 'GET':
+             return render_template("tooljinja.html", name=name)
+
+    if request.method == 'POST':
+            uploaded_files = request.files.getlist('files[]')
+            if uploaded_files:
+               for file in uploaded_files:
+                 fileName = secure_filename(file.filename)
+                 Upload_path = os.path.join(UPLOAD_FOLDER,fileName)
+                 output_fileName = f"Rotated_{fileName}"
+                 Output_path = os.path.join(OUTPUT_FOLDER,output_fileName)
+                 
+                 file.save(Upload_path)
+                
+               angle = int(request.form.get("value", 90))
+
+          #Ghostscript command
+            Writer = PdfWriter()
+            Reader = PdfReader(Upload_path)
+            try:
+                for page in Reader.pages:
+                 page.rotate(angle)
+                 Writer.add_page(page)
+
+                with open(Output_path, "wb") as f :
+                    Writer.write(f)
+                return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
+
+                 
+            except subprocess.CalledProcessError as e:
+                 print("Process failed try again: ",e)           
+                 return jsonify(success=False, error="Ghostscript processing failed."), 500
+                 
+    return jsonify(success=False, error="File upload failed"), 400
+
+def pdf_textext(name):
+    if request.method == 'GET':
+             return render_template("tooljinja.html", name=name)
+
+    if request.method == 'POST':
+            uploaded_files = request.files.getlist('files[]')
+            if uploaded_files:
+               for file in uploaded_files:
+                 fileName = secure_filename(file.filename)
+                 Upload_path = os.path.join(UPLOAD_FOLDER,fileName)
+                 output_fileName = "Text_file.txt"
+                 Output_path = os.path.join(OUTPUT_FOLDER,output_fileName)
+                 
+                 file.save(Upload_path)
+                
+            
+
+          #PyuPDf command
+            try:
+              doc = fitz.open(Upload_path)
+              with open(Output_path, "w", encoding="utf-8") as f:
+               for i, page in enumerate(doc):
+                  text = page.get_text()
+                  f.write(f"----Page {i+1}----\n{text}\n\n")
+              doc.close()
+              print(f"Text saved to: {Output_path}")
+              return send_from_directory(directory=OUTPUT_FOLDER, path=output_fileName, as_attachment= True)
+            except Exception as e:
+             print("Extraction failed:", e)
+             return  jsonify(success=False, error="Ghostscript processing failed."), 500
                  
     return jsonify(success=False, error="File upload failed"), 400
 

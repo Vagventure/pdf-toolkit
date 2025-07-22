@@ -2,3 +2,5 @@ Flask
 gunicorn
 ghostscript
 Pillow
+PyMuPDF
+pypdf

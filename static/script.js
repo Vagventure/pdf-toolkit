@@ -121,7 +121,7 @@ function checkAndSubmitEncrypt() {
             const blob = xhr.response;
             const cd = xhr.getResponseHeader("Content-Disposition") || "";
             const m = /filename="?(.+)"?/.exec(cd);
-            const fname = m ? m[1] : "locked.pdf";
+            const fname = m ? m[1] : "Input_pdf.pdf";
 
             const url = URL.createObjectURL(blob);
             const a = document.createElement("a");
@@ -332,6 +332,25 @@ switch (op) {
 
         break;
 
+    case "Pdf Decryptor":
+        let box3 = document.querySelector(".option")
+        box3.innerHTML = `
+                                     <label for="file-upload" class="p-1 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">
+                                     Upload File
+                                     </label>
+                                     <div class="flex flex-col items-center">
+                                         <input id="file-upload" class="hidden" type="file" name="files[]" onChange= checkAndSubmitEncrypt() multiple />
+                                         
+                                        <div class="options w-auto mx-auto mt-3 items-center justify-center flex gap-7 h-auto"> <input
+                                                 class="bg-white outline-1 text-center text-black w-32 font-medium" id="pass" type="text" placeholder="Current Password"
+                                                 name="code" onChange= checkAndSubmitEncrypt()>
+                                         </div>
+                                         <progress id="upload-progress" value="0" max="100" class="w-1/3 mt-3"></progress>
+                                     </div>
+                                     `
+
+        break;
+
     case "Pdf Compresser":
         let box2 = document.querySelector(".option")
         box2.innerHTML = `
@@ -346,6 +365,26 @@ switch (op) {
                                          <option value="/default"> Standard Quality(Best for Most Uses) </option>
                                          <option value="/ebook"> Small File(Fastest to Load) </option>
                                          <option value="/screen"> Ultra Compressed(For Screen Only) </option>
+                                         </select> 
+                                         </div>
+                                         <progress id="upload-progress" value="0" max="100" class="w-1/3 mt-3"></progress>
+                                     </div>
+                                     `
+        break;
+
+    case "Pdf Rotator":
+        let box4 = document.querySelector(".option")
+        box4.innerHTML = `
+                                     <label for="file-upload" class="p-1 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">
+                                     Upload File
+                                     </label>
+                                     <div class="flex flex-col items-center justify-center">
+                                         <input id="file-upload" class="hidden" type="file" name="files[]" onChange= checkAndSubmitCompress() multiple />
+                                         
+                                        <div class="options w-auto mx-auto mt-3 items-center justify-center flex gap-7 h-auto"> <select class="border-2 bg-white text-black" name="value" id="quality" onChange= checkAndSubmitCompress()>
+                                        <option value="90">Rotate 90°</option>
+                                        <option value="180">Rotate 180°</option>
+                                        <option value="270">Rotate 270°</option>
                                          </select> 
                                          </div>
                                          <progress id="upload-progress" value="0" max="100" class="w-1/3 mt-3"></progress>

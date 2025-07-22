@@ -524,9 +524,7 @@ def pdf_textext(name):
                  output_fileName = "Text_file.txt"
                  Output_path = os.path.join(OUTPUT_FOLDER,output_fileName)
                  
-                 file.save(Upload_path)
-                
-            
+                 file.save(Upload_path)                          
 
           #PyuPDf command
             try:

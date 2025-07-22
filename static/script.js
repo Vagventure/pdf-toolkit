@@ -10,6 +10,7 @@ window.addEventListener('DOMContentLoaded', () => {
 });
 
 
+
 const slider = document.getElementById('slider')
 const kids = slider.children;
 let current = 0;
@@ -390,6 +391,10 @@ switch (op) {
                                          <progress id="upload-progress" value="0" max="100" class="w-1/3 mt-3"></progress>
                                      </div>
                                      `
+       
+            document.querySelector(".img1").classList.add("p-2")
+        
+
         break;
 
 

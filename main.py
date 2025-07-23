@@ -45,8 +45,10 @@ app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
 def empty_dir(path):
     [os.remove(os.path.join(path, f)) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
 
-def create_watermark(text, output_path="./uploads/watermark.pdf"):
-    c = canvas.Canvas(output_path, pagesize=A4)
+def create_watermark(text, output="./uploads/watermark.pdf"):
+    os.makedirs(os.path.dirname(output), exist_ok=True)
+
+    c = canvas.Canvas(output, pagesize=A4)
     c.setFont("Helvetica", 100)
     c.setFillColor(Color(0.5, 0.5, 0.5, alpha=0.6))
     c.saveState()
@@ -55,7 +57,7 @@ def create_watermark(text, output_path="./uploads/watermark.pdf"):
     c.drawCentredString(0, 0, text)
     c.restoreState()
     c.save()
-    return output_path 
+    return output 
 
 @app.route("/")
 def hello_world():

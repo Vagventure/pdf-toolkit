@@ -4,3 +4,4 @@ ghostscript
 Pillow
 PyMuPDF
 pypdf
+reportlab

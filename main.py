@@ -9,11 +9,17 @@ from werkzeug.utils import secure_filename
 from pypdf import PdfWriter,PdfReader
 import fitz
 import zipfile
+import time
 import os
+import io
 import subprocess
 import platform
 from PIL import Image
 from flask import after_this_request
+from reportlab.pdfgen import canvas
+from reportlab.lib.pagesizes import A4
+from reportlab.lib.colors import Color, black
+
 
 
 app = Flask(__name__)
@@ -38,6 +44,18 @@ app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
 
 def empty_dir(path):
     [os.remove(os.path.join(path, f)) for f in os.listdir(path) if os.path.isfile(os.path.join(path, f))]
+
+def create_watermark(text, output_path="./uploads/watermark.pdf"):
+    c = canvas.Canvas(output_path, pagesize=A4)
+    c.setFont("Helvetica", 100)
+    c.setFillColor(Color(0.5, 0.5, 0.5, alpha=0.6))
+    c.saveState()
+    c.translate(300, 400)
+    c.rotate(45)
+    c.drawCentredString(0, 0, text)
+    c.restoreState()
+    c.save()
+    return output_path 
 
 @app.route("/")
 def hello_world():
@@ -100,6 +118,9 @@ def pdf_tool(slug):
        
        case "Text Extractor":
            return pdf_textext(op)
+        
+       case "Pdf Watermarker":
+           return pdf_Wmark(op)
   
     # return render_template("tooljinja.html", name=op , operation="splitt pdf")      
          
@@ -542,3 +563,47 @@ def pdf_textext(name):
                  
     return jsonify(success=False, error="File upload failed"), 400
 
+
+def pdf_Wmark(name):
+    if request.method == 'GET':
+        return render_template("tooljinja.html", name=name)
+
+    if request.method == 'POST':
+        uploaded_files = request.files.getlist('files[]')
+        if not uploaded_files:
+            return jsonify(success=False, error="No files uploaded"), 400
+
+        for file in uploaded_files:
+         fileName = secure_filename(file.filename)
+         Upload_path = os.path.join(UPLOAD_FOLDER, fileName)
+         output_fileName = f"Watermarked_{fileName}"
+         Output_path = os.path.join(OUTPUT_FOLDER, output_fileName)
+     
+         file.save(Upload_path)
+         file.stream.seek(0)
+     
+         if os.path.getsize(Upload_path) == 0:
+             print(f"❌ File {fileName} is empty after saving.")
+             continue  # Skip this file
+     
+         # Proceed only if saved properly
+         watermark_pdf_bytes = create_watermark("Confidential")
+         time.sleep(1)
+         input_pdf = PdfReader(Upload_path)
+         watermark_pdf = PdfReader(watermark_pdf_bytes)
+         watermark_page = watermark_pdf.pages[0]
+     
+         writer = PdfWriter()
+     
+         for page in input_pdf.pages:
+             page.merge_page(watermark_page)
+             writer.add_page(page)
+     
+         with open(Output_path, "wb") as f_out:
+             writer.write(f_out)
+     
+         print(f"✅ Watermarked PDF generated: {output_fileName}")
+         return send_from_directory(OUTPUT_FOLDER, output_fileName, as_attachment=True)
+
+
+    return jsonify(success=False, error="Invalid method"), 400

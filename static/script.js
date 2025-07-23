@@ -397,6 +397,24 @@ switch (op) {
 
         break;
 
+        case "Pdf Watermarker":
+        let box5 = document.querySelector(".option")
+        box5.innerHTML = `
+                                     <label for="file-upload" class="p-1 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">
+                                     Upload File
+                                     </label>
+                                     <div class="flex flex-col items-center">
+                                         <input id="file-upload" class="hidden" type="file" name="files[]" onChange= checkAndSubmitEncrypt() multiple />
+                                         
+                                        <div class="options w-auto mx-auto mt-3 items-center justify-center flex gap-7 h-auto"> <input
+                                                 class="bg-white outline-1 text-center text-black w-32 font-medium" id="pass" type="text" placeholder="Watermark"
+                                                 name="code" onChange= checkAndSubmitEncrypt()>
+                                         </div>
+                                         <progress id="upload-progress" value="0" max="100" class="w-1/3 mt-3"></progress>
+                                     </div>
+                                     
+                                     `
+        break;
 
 }
 

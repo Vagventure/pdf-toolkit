@@ -278,14 +278,91 @@ function checkAndSubmitNormal() {
             sig2 = document.querySelector(".blinker2")
             sig2.classList.remove('hidden')
             sig.classList.add('hidden')
-
-
+            
         } else {
             alert("Upload failed")
         }
     }
 
     xhr.send(formData)
+}
+
+function checkAndSubmitOrder() {
+    const fileInput = document.getElementById('file-upload');
+    const progressBar = document.getElementById('upload-progress');
+
+    const files = fileInput.files;
+    if (!files || files.length === 0) return;
+
+    const xhr = new XMLHttpRequest();
+    const formData = new FormData();
+
+    for (let i = 0; i < files.length; i++) {
+        formData.append('files[]', files[i]);
+    }
+
+    xhr.open('POST', `/tools/${op}`, true);
+    xhr.responseType = 'blob';
+
+    progressBar.classList.remove('hidden');
+
+    xhr.upload.onprogress = (e) => {
+        if (e.lengthComputable) {
+            const percent = (e.loaded / e.total) * 100;
+            progressBar.value = percent;
+
+            document.querySelector(".blinker")?.classList.toggle('hidden');
+        }
+    };
+
+    xhr.onload = () => {
+        if (xhr.status === 200) {
+            // Save PDF file or whatever was returned
+            const blob = xhr.response;
+            const cd = xhr.getResponseHeader("Content-Disposition") || "";
+            const m = /filename="?(.+)"?/.exec(cd);
+            const fname = m ? m[1] : "output.pdf";
+
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = fname;
+            a.click();
+            URL.revokeObjectURL(url);
+
+            // Update progress
+            progressBar.value = 100;
+            document.querySelector(".blinker2")?.classList.remove('hidden');
+            document.querySelector(".blinker")?.classList.add('hidden');
+
+            // Fetch previews
+            fetch('/previews')
+                .then(res => res.json())
+                .then(images => {
+                    const previewContainer = document.getElementById('preview-container');
+                    previewContainer.innerHTML = '';
+
+                    images.forEach((img, i) => {
+                        const imgElem = document.createElement('img');
+                        imgElem.src = `/previews/${img}?t=${Date.now()}`; // cache-busting
+                        imgElem.alt = `Preview ${i + 1}`;
+                        imgElem.className = 'w-14 h-14 object-cover rounded border';
+                        previewContainer.appendChild(imgElem);
+                    });
+                })
+                .catch(err => {
+                    console.error('Error fetching previews:', err);
+                });
+        } else {
+            alert("Upload failed");
+        }
+    };
+
+    xhr.onerror = () => {
+        alert("Upload error occurred.");
+    };
+
+    xhr.send(formData);
 }
 
 
@@ -391,13 +468,13 @@ switch (op) {
                                          <progress id="upload-progress" value="0" max="100" class="w-1/3 mt-3"></progress>
                                      </div>
                                      `
-       
-            document.querySelector(".img1").classList.add("p-2")
-        
+
+        document.querySelector(".img1").classList.add("p-2")
+
 
         break;
 
-        case "Pdf Watermarker":
+    case "Pdf Watermarker":
         let box5 = document.querySelector(".option")
         box5.innerHTML = `
                                      <label for="file-upload" class="p-1 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">
@@ -416,6 +493,45 @@ switch (op) {
                                      `
         break;
 
+    case "Pdf Reorderer":
+        let box6 = document.querySelector(".option")
+        box6.innerHTML = `
+                                     <label for="file-upload" class="p-1 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">
+                                     Upload File
+                                     </label>
+                                     <div class="flex flex-col items-center gap-1">
+                                         <input id="file-upload" class="hidden" type="file" name="files[]" onChange= checkAndSubmitOrder() multiple />
+                                         
+                                        <div id="preview-container" class="options w-full h-32 mx-auto mt-3 border-2 items-center justify-center flex flex-wrap gap-1"> 
+                                        <div class="h-14 w-14 flex items-center justify-center outline-1">Hello</div>
+                                      
+                                        </div>
+
+                                      <button class="w-auto h-auto p-1 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">Download</button>
+                                      <progress id="upload-progress" value="0" max="100" class="w-1/3 mt-1"></progress>
+                                     </div>
+                                     
+                                     `
+        break;
+
+}
+
+
+function loadPreviews() {
+    fetch('/preview-list')
+        .then(res => res.json())
+        .then(images => {
+            const container = document.getElementById('preview-container');
+            container.innerHTML = ""; // clear old content
+
+            images.forEach(filename => {
+                const img = document.createElement('img');
+                img.src = `/previews/${filename}`;
+                img.className = "h-20 w-20 object-contain border";
+                img.setAttribute("draggable", true);
+                container.appendChild(img);
+            });
+        });
 }
 
 document.querySelector(".burger").addEventListener('click', () => {

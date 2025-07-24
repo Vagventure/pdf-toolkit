@@ -493,8 +493,8 @@
 
      <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
       <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
-        <figure class="w-23 p-2 object-contain text-center"><img class="w-full h-full"
-            src="https://images.openai.com/thumbnails/url/fSAyMHicu1mSUVJSUGylr5-al1xUWVCSmqJbkpRnoJdeXJJYkpmsl5yfq5-Zm5ieWmxfaAuUsXL0S7F0Tw4KCM_LKo93NDH0zcjKc8-PtDAqN3ezTHJLLSz0TvV38630SM81c_d2NDfJ0_W2DAhwscwv9g8qdtTNDVQrBgAKHSj5">
+        <figure class="w-23 object-contain text-center"><img class="w-full h-full"
+            src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
           <figcaption>Input Pdf</figcaption>
         </figure>
         <img width="30" src="{{url_for('static', filename='icons/convert.svg')}}" alt="convert icon">
@@ -549,6 +549,37 @@
         <input type="hidden" name="caption2" value="Watermarkerd Pdf">
 
         <input type="hidden" name="description" value="Add a Watermarks to your pdf of your choice efficiently">
+
+      </form>
+    </div>
+
+         <div class="tool-card w-11/12 md:w-1/3 h-2/3 p-7 bg-white outline-1 rounded-2xl justify-between text-center">
+      <div class="w-full h-1/3 flex mb-2 items-center justify-center gap-5">
+        <figure class="w-23 object-contain text-center"><img class="w-full h-full"
+            src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+          <figcaption>Input Pdf</figcaption>
+        </figure>
+        <img width="30" src="{{url_for('static', filename='icons/convert.svg')}}" alt="convert icon">
+        <figure class="w-23 object-contain text-center flex flex-col items-center"><img class="w-full h-full"
+            src="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+          <figcaption class="w-32">Reordered Pdf</figcaption>
+        </figure>
+      </div>
+      <div class="space-y-1">
+        <button class="tools p-1.5 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">Pdf Reorderer</button>
+        <p class="text-[14px] md:text-lg">Easily sort your pdf pages based upon your preference with the easy and seemless drag and drop functionality
+        <p>
+      </div>
+      <form method="GET" class="formsubmit Pdf-Reorderer" action="">
+        <input  type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Input Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption2" value="Reordered Pdf">
+
+        <input type="hidden" name="description" value="Easily sort your pdf pages based upon your preference with the easy and seemless drag and drop functionality">
 
       </form>
     </div>

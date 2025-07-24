@@ -31,15 +31,19 @@ gs_cmd = 'gswin64c' if platform.system() == 'Windows' else 'gs'
 if os.environ.get('RENDER'):  # Custom flag for Render (you can set this in env vars)
     UPLOAD_FOLDER = '/tmp/uploads'
     OUTPUT_FOLDER = '/tmp/output'
+    PREVIEW_FOLDER = '/tmp/previews'
 else:
     UPLOAD_FOLDER = os.path.abspath('uploads')
     OUTPUT_FOLDER = os.path.abspath('output')
+    PREVIEW_FOLDER = os.path.abspath('previews')
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+os.makedirs(PREVIEW_FOLDER, exist_ok=True)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
+app.config['PREVIEW_FOLDER'] = PREVIEW_FOLDER
 
 
 def empty_dir(path):
@@ -64,6 +68,25 @@ def hello_world():
     empty_dir(UPLOAD_FOLDER)
     empty_dir(OUTPUT_FOLDER)
     return render_template('index.html')
+
+# @app.route('/preview-list')
+# def preview_list():
+#     previews = os.listdir('previews')
+#     return jsonify(previews)
+
+# @app.route('/previews/<filename>')
+# def get_preview(filename):
+#     return send_from_directory('previews', filename)
+
+@app.route('/previews/<filename>')
+def serve_preview(filename):
+    return send_from_directory('previews', filename)
+
+@app.route('/previews')
+def list_previews():
+    files = os.listdir('previews')
+    image_files = [f for f in files if f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp'))]
+    return jsonify(image_files)
 
 
 @app.route("/tools/<slug>", methods=['GET','POST'])
@@ -123,6 +146,9 @@ def pdf_tool(slug):
         
        case "Pdf Watermarker":
            return pdf_Wmark(op)
+      
+       case "Pdf Reorderer":
+           return pdf_reorder(op)
   
     # return render_template("tooljinja.html", name=op , operation="splitt pdf")      
          
@@ -606,6 +632,45 @@ def pdf_Wmark(name):
      
          print(f"✅ Watermarked PDF generated: {output_fileName}")
          return send_from_directory(OUTPUT_FOLDER, output_fileName, as_attachment=True)
+
+
+    return jsonify(success=False, error="Invalid method"), 400
+
+def pdf_reorder(name):
+    if request.method == 'GET':
+        return render_template("tooljinja.html", name=name)
+
+    if request.method == 'POST':
+        uploaded_files = request.files.getlist('files[]')
+        if not uploaded_files:
+            return jsonify(success=False, error="No files uploaded"), 400
+        previews = []
+        for file in uploaded_files:
+           fileName = secure_filename(file.filename)
+           Upload_path = os.path.join(UPLOAD_FOLDER, fileName)
+           output_fileName = f"Watermarked_{fileName}"
+           Output_path = os.path.join(OUTPUT_FOLDER, output_fileName)
+       
+           file.save(Upload_path)
+
+           doc = fitz.open(Upload_path)
+           for i in range(len(doc)):
+               page = doc[i]
+               pix  = page.get_pixmap(matrix=fitz.Matrix(2,2))
+               img_bytes = io.BytesIO(pix.tobytes("png"))
+
+               preview_filename = f"{fileName}_page_{i}.png"
+               preview_path = os.path.join(PREVIEW_FOLDER, preview_filename)
+               with open(preview_path,"wb") as img_file:
+                   img_file.write(img_bytes.getvalue())
+
+               previews.append({
+                   "page": i,
+                   "preview_url": f"/preview/{preview_filename}"
+               })
+
+        return jsonify(success=False, previews=previews)
+         
 
 
     return jsonify(success=False, error="Invalid method"), 400

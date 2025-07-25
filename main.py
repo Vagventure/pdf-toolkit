@@ -11,6 +11,7 @@ import fitz
 import zipfile
 import time
 import os
+import shutil
 import io
 import subprocess
 import platform
@@ -67,6 +68,7 @@ def create_watermark(text, output="./uploads/watermark.pdf"):
 def hello_world():
     empty_dir(UPLOAD_FOLDER)
     empty_dir(OUTPUT_FOLDER)
+    empty_dir(PREVIEW_FOLDER)
     return render_template('index.html')
 
 # @app.route('/preview-list')
@@ -87,6 +89,53 @@ def list_previews():
     files = os.listdir('previews')
     image_files = [f for f in files if f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp'))]
     return jsonify(image_files)
+
+@app.route('/reorder-previews', methods=['POST'])
+def reorder_previews():
+    data = request.json
+    order = data.get('order', [])
+
+    temp_folder = 'Preview_temp'
+
+    os.makedirs(temp_folder, exist_ok=True)
+
+    # Move files to temp in the new order
+    for i, filename in enumerate(order):
+        src = os.path.join(PREVIEW_FOLDER, filename)
+        dst = os.path.join(temp_folder, f"{i:03d}_{filename}")
+       
+        if os.path.exists(src):
+            shutil.move(src, dst)
+
+    # Clear old previews and move temp back
+    for f in os.listdir(PREVIEW_FOLDER):
+        os.remove(os.path.join(PREVIEW_FOLDER, f))
+
+    for f in os.listdir(temp_folder):
+        shutil.move(os.path.join(temp_folder, f), os.path.join(PREVIEW_FOLDER, f))
+
+    os.rmdir(temp_folder)
+    pdf_path = os.path.join(OUTPUT_FOLDER, "Reordered_pdf.pdf")
+    doc = fitz.open()
+
+    for filename in sorted(os.listdir(PREVIEW_FOLDER)):
+        filepath = os.path.join(PREVIEW_FOLDER, filename)
+        img = fitz.Pixmap(filepath)
+
+        if img.alpha:  # If image has transparency
+            img = fitz.Pixmap(fitz.csRGB, img)
+
+        rect = fitz.Rect(0, 0, img.width, img.height)
+        page = doc.new_page(width=img.width, height=img.height)
+        page.insert_image(rect, pixmap=img)
+        img = None  # free memory
+
+    doc.save(pdf_path)
+    doc.close()
+
+    return send_from_directory(directory=OUTPUT_FOLDER, path="Reordered_pdf.pdf", as_attachment= True)
+
+
 
 
 @app.route("/tools/<slug>", methods=['GET','POST'])
@@ -669,8 +718,6 @@ def pdf_reorder(name):
                    "preview_url": f"/preview/{preview_filename}"
                })
 
-        return jsonify(success=False, previews=previews)
+        return jsonify(success=True)
          
-
-
     return jsonify(success=False, error="Invalid method"), 400

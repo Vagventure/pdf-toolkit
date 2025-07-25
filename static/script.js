@@ -278,7 +278,7 @@ function checkAndSubmitNormal() {
             sig2 = document.querySelector(".blinker2")
             sig2.classList.remove('hidden')
             sig.classList.add('hidden')
-            
+
         } else {
             alert("Upload failed")
         }
@@ -302,8 +302,7 @@ function checkAndSubmitOrder() {
     }
 
     xhr.open('POST', `/tools/${op}`, true);
-    xhr.responseType = 'blob';
-
+   
     progressBar.classList.remove('hidden');
 
     xhr.upload.onprogress = (e) => {
@@ -318,18 +317,6 @@ function checkAndSubmitOrder() {
     xhr.onload = () => {
         if (xhr.status === 200) {
             // Save PDF file or whatever was returned
-            const blob = xhr.response;
-            const cd = xhr.getResponseHeader("Content-Disposition") || "";
-            const m = /filename="?(.+)"?/.exec(cd);
-            const fname = m ? m[1] : "output.pdf";
-
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = fname;
-            a.click();
-            URL.revokeObjectURL(url);
-
             // Update progress
             progressBar.value = 100;
             document.querySelector(".blinker2")?.classList.remove('hidden');
@@ -344,9 +331,34 @@ function checkAndSubmitOrder() {
 
                     images.forEach((img, i) => {
                         const imgElem = document.createElement('img');
-                        imgElem.src = `/previews/${img}?t=${Date.now()}`; // cache-busting
+                        imgElem.src = `/previews/${img}`;
                         imgElem.alt = `Preview ${i + 1}`;
                         imgElem.className = 'w-14 h-14 object-cover rounded border';
+                        imgElem.draggable = true;
+                        imgElem.dataset.filename = img;
+
+                        imgElem.addEventListener('dragstart', (e) => {
+                            e.dataTransfer.setData('text/plain', img);
+                        });
+
+                        imgElem.addEventListener('drop', (e) => {
+                            e.preventDefault();
+                            const draggedImg = e.dataTransfer.getData('text/plain');
+                            const dropTarget = e.currentTarget.dataset.filename;
+
+                            const container = document.getElementById('preview-container');
+                            const draggedElem = [...container.children].find(child => child.dataset.filename === draggedImg);
+                            const targetElem = [...container.children].find(child => child.dataset.filename === dropTarget);
+
+                            if (draggedElem && targetElem && draggedElem !== targetElem) {
+                                container.insertBefore(draggedElem, targetElem.nextSibling);
+                            }
+                        });
+
+                        imgElem.addEventListener('dragover', (e) => {
+                            e.preventDefault();
+                        });
+
                         previewContainer.appendChild(imgElem);
                     });
                 })
@@ -364,6 +376,38 @@ function checkAndSubmitOrder() {
 
     xhr.send(formData);
 }
+
+
+function submitReorder() {
+    const container = document.getElementById('preview-container');
+    const orderedFilenames = [...container.children].map(child => child.dataset.filename);
+
+    fetch('/reorder-previews', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ order: orderedFilenames }),
+    }).then(res => {
+        if (!res.ok) throw new Error("Network response was not ok.");
+        return res.blob();
+    })
+        .then(blob => {
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "Reordered_pdf.pdf";  // Optional: customize name
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+        })
+        .catch(err => {
+            console.error("Download failed:", err);
+        });
+
+}
+
 
 
 op = document.title
@@ -507,7 +551,7 @@ switch (op) {
                                       
                                         </div>
 
-                                      <button class="w-auto h-auto p-1 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">Download</button>
+                                      <button class="w-auto h-auto p-1 rounded-lg bg-orange-300 font-bold text-white cursor-pointer" onClick=submitReorder()>Download</button>
                                       <progress id="upload-progress" value="0" max="100" class="w-1/3 mt-1"></progress>
                                      </div>
                                      

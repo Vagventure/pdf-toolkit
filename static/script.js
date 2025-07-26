@@ -302,7 +302,7 @@ function checkAndSubmitOrder() {
     }
 
     xhr.open('POST', `/tools/${op}`, true);
-   
+
     progressBar.classList.remove('hidden');
 
     xhr.upload.onprogress = (e) => {
@@ -327,13 +327,16 @@ function checkAndSubmitOrder() {
                 .then(res => res.json())
                 .then(images => {
                     const previewContainer = document.getElementById('preview-container');
-                    previewContainer.innerHTML = '';
+                    previewContainer.innerHTML = ` <div class="prev-box w-[200px] h-[200px] p-3 bg-orange-200 hidden fixed outline-1">
+                                                  </div>`;
+                    previewContainer.classList.replace('h-32', 'h-auto')
 
                     images.forEach((img, i) => {
                         const imgElem = document.createElement('img');
                         imgElem.src = `/previews/${img}`;
                         imgElem.alt = `Preview ${i + 1}`;
-                        imgElem.className = 'w-14 h-14 object-cover rounded border';
+                        imgElem.classList.add('img-prev');
+                        imgElem.className = 'w-16 h-16 object-cover rounded border';
                         imgElem.draggable = true;
                         imgElem.dataset.filename = img;
 
@@ -359,12 +362,63 @@ function checkAndSubmitOrder() {
                             e.preventDefault();
                         });
 
+
+                        imgElem.addEventListener('click', () => {
+                            let box = document.querySelector(".prev-box")
+                            box.classList.remove('hidden')
+                            box.innerHTML = ''
+                            let Pimg = document.createElement('img')
+                            Pimg.src = `/previews/${img}`;
+                            Pimg.alt = `Preview ${i + 1}`;
+                            Pimg.className = 'w-ful h-full object-cover rounded';
+                            Pimg.dataset.filename = img;
+                            box.appendChild(Pimg)
+                            box.innerHTML += '<div class="absolute top-2 right-2 underline cursor-pointer">Close</div>'
+                            box.querySelector('div').addEventListener('click', ()=>{
+                                box.classList.add('hidden')
+                            })
+
+                        })
+
                         previewContainer.appendChild(imgElem);
                     });
                 })
                 .catch(err => {
                     console.error('Error fetching previews:', err);
                 });
+
+            let extra = document.querySelector(".extra-button")
+            extra.innerHTML = `<button id="reorder-form" class="w-auto h-auto p-1 rounded-lg bg-orange-300 font-bold text-white cursor-pointer">Download</button>`
+            document.getElementById('reorder-form').addEventListener('click', function (e) {
+                e.preventDefault();
+                const container = document.getElementById('preview-container');
+                const orderedFilenames = [...container.children].map(child => child.dataset.filename);
+
+                fetch('/reorder-previews', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({ order: orderedFilenames }),
+                }).then(res => {
+                    if (!res.ok) throw new Error("Network response was not ok.");
+                    return res.blob();
+                })
+                    .then(blob => {
+                        const url = window.URL.createObjectURL(blob);
+                        const a = document.createElement("a");
+                        a.href = url;
+                        a.download = "Reordered_pdf.pdf";  // Optional: customize name
+                        document.body.appendChild(a);
+                        a.click();
+                        a.remove();
+                        window.URL.revokeObjectURL(url);
+                    })
+                    .catch(err => {
+                        console.error("Download failed:", err);
+                    });
+
+            })
         } else {
             alert("Upload failed");
         }
@@ -376,38 +430,6 @@ function checkAndSubmitOrder() {
 
     xhr.send(formData);
 }
-
-
-function submitReorder() {
-    const container = document.getElementById('preview-container');
-    const orderedFilenames = [...container.children].map(child => child.dataset.filename);
-
-    fetch('/reorder-previews', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ order: orderedFilenames }),
-    }).then(res => {
-        if (!res.ok) throw new Error("Network response was not ok.");
-        return res.blob();
-    })
-        .then(blob => {
-            const url = window.URL.createObjectURL(blob);
-            const a = document.createElement("a");
-            a.href = url;
-            a.download = "Reordered_pdf.pdf";  // Optional: customize name
-            document.body.appendChild(a);
-            a.click();
-            a.remove();
-            window.URL.revokeObjectURL(url);
-        })
-        .catch(err => {
-            console.error("Download failed:", err);
-        });
-
-}
-
 
 
 op = document.title
@@ -546,16 +568,15 @@ switch (op) {
                                      <div class="flex flex-col items-center gap-1">
                                          <input id="file-upload" class="hidden" type="file" name="files[]" onChange= checkAndSubmitOrder() multiple />
                                          
-                                        <div id="preview-container" class="options w-full h-32 mx-auto mt-3 border-2 items-center justify-center flex flex-wrap gap-1"> 
-                                        <div class="h-14 w-14 flex items-center justify-center outline-1">Hello</div>
-                                      
+                                        <div id="preview-container" class="options w-full h-32 relative mx-auto mt-3 border-2 items-center justify-center flex flex-wrap gap-1"> 
+                                        <div class="h-auto w-auto text-cnter underline">Upload your pdf first</div>
                                         </div>
-
-                                      <button class="w-auto h-auto p-1 rounded-lg bg-orange-300 font-bold text-white cursor-pointer" onClick=submitReorder()>Download</button>
+                                       
                                       <progress id="upload-progress" value="0" max="100" class="w-1/3 mt-1"></progress>
                                      </div>
                                      
                                      `
+
         break;
 
 }
@@ -741,3 +762,5 @@ document.querySelectorAll(".quick-tool, .Reco-tool").forEach(e => {
     })
 
 })
+
+

@@ -82,11 +82,11 @@ def hello_world():
 
 @app.route('/previews/<filename>')
 def serve_preview(filename):
-    return send_from_directory('previews', filename)
+    return send_from_directory(PREVIEW_FOLDER, filename)
 
 @app.route('/previews')
 def list_previews():
-    files = os.listdir('previews')
+    files = os.listdir(PREVIEW_FOLDER)
     image_files = [f for f in files if f.lower().endswith(('.jpg', '.jpeg', '.png', '.webp'))]
     return jsonify(image_files)
 

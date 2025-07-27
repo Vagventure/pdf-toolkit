@@ -327,8 +327,7 @@ function checkAndSubmitOrder() {
                 .then(res => res.json())
                 .then(images => {
                     const previewContainer = document.getElementById('preview-container');
-                    previewContainer.innerHTML = ` <div class="prev-box w-[200px] h-[200px] p-3 bg-orange-200 hidden fixed outline-1">
-                                                  </div>`;
+                    previewContainer.innerHTML = ` `;
                     previewContainer.classList.replace('h-32', 'h-auto')
 
                     images.forEach((img, i) => {

@@ -102,10 +102,17 @@ def reorder_previews():
     # Move files to temp in the new order
     for i, filename in enumerate(order):
         src = os.path.join(PREVIEW_FOLDER, filename)
+        if not os.path.exists(src):
+         print(f"[!] Skipping missing file: {filename}")
+         continue  # skip this file
         dst = os.path.join(temp_folder, f"{i:03d}_{filename}")
        
         if os.path.exists(src):
             shutil.move(src, dst)
+
+    print("Received reorder list:", order)
+    print("Existing preview files:", os.listdir(PREVIEW_FOLDER))
+
 
     # Clear old previews and move temp back
     for f in os.listdir(PREVIEW_FOLDER):

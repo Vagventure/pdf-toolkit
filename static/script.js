@@ -365,15 +365,15 @@ function checkAndSubmitOrder() {
                         imgElem.addEventListener('click', () => {
                             let box = document.querySelector(".prev-box")
                             box.classList.remove('hidden')
-                            box.innerHTML = ''
+                            box.innerHTML = '<button class=" p-1 text-black rounded-2xl font-medium bg-amber-100 cursor-pointer">Close</button>'
                             let Pimg = document.createElement('img')
                             Pimg.src = `/previews/${img}`;
                             Pimg.alt = `Preview ${i + 1}`;
                             Pimg.className = 'w-ful h-full object-cover rounded';
                             Pimg.dataset.filename = img;
                             box.appendChild(Pimg)
-                            box.innerHTML += '<div class="absolute top-2 right-2 underline cursor-pointer">Close</div>'
-                            box.querySelector('div').addEventListener('click', ()=>{
+                            // box.innerHTML += ''
+                            box.querySelector('button').addEventListener('click', ()=>{
                                 box.classList.add('hidden')
                             })
 
@@ -567,7 +567,7 @@ switch (op) {
                                      <div class="flex flex-col items-center gap-1">
                                          <input id="file-upload" class="hidden" type="file" name="files[]" onChange= checkAndSubmitOrder() multiple />
                                          
-                                        <div id="preview-container" class="options w-full h-32 relative mx-auto mt-3 border-2 items-center justify-center flex flex-wrap gap-1"> 
+                                        <div id="preview-container" class="options w-full h-32 mx-auto mt-3 border-2 items-center justify-center flex flex-wrap gap-1"> 
                                         <div class="h-auto w-auto text-cnter underline">Upload your pdf first</div>
                                         </div>
                                        

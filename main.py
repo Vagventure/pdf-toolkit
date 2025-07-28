@@ -1,6 +1,6 @@
 from flask import Flask
 from markupsafe import escape
-from flask import url_for , jsonify
+from flask import url_for, redirect , jsonify
 from flask import render_template
 from flask import request
 from flask import send_from_directory
@@ -64,7 +64,7 @@ def create_watermark(text, output="./uploads/watermark.pdf"):
     c.save()
     return output 
 
-@app.route("/")
+@app.route("/tools")
 def hello_world():
     empty_dir(UPLOAD_FOLDER)
     empty_dir(OUTPUT_FOLDER)
@@ -142,7 +142,14 @@ def reorder_previews():
 
     return send_from_directory(directory=OUTPUT_FOLDER, path="Reordered_pdf.pdf", as_attachment= True)
 
+@app.route('/')
+def index():
+    return redirect(url_for('home'))
 
+
+@app.route('/home')
+def pdf_home():
+    return render_template("home.html")
 
 
 @app.route("/tools/<slug>", methods=['GET','POST'])

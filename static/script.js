@@ -19,7 +19,13 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+  document.querySelectorAll(".links li").forEach(e => {
+        e.addEventListener('click', (event) => {
+          address = event.target.innerText.toLowerCase();
+          window.open(`/${address}`, '_blank')
+        })
 
+      })
 
 const slider = document.getElementById('slider')
 const kids = slider.children;
@@ -749,6 +755,22 @@ document.querySelectorAll(".quick-tool, .Reco-tool").forEach(e => {
                 `
                 break
 
+            case "Pdf Encryptor":
+                form.classList.add(opr)
+                form.action = `/tools/${encodeURIComponent(text)}`
+                form.innerHTML = `
+                
+                        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st2.depositphotos.com/42596756/44437/v/600/depositphotos_444376980-stock-illustration-file-folders-vector-icon.jpg">
+        <input type="hidden" name="caption2" value="Locked Pdf">
+
+        <input type="hidden" name="description" value="Add strong password protection to your PDFs to prevent unauthorized access,
+          copying, or editing.">`
+                break
             case "Pdf Encryptor":
                 form.classList.add(opr)
                 form.action = `/tools/${encodeURIComponent(text)}`

@@ -20,72 +20,124 @@
     'Pdf to PNG': """
     <span>Instructions:</span>
     <ol>
-        <li>Upload your PDF document.</li>
-        <li>Your file would be processed automatically.</li>
-        <li>A zip file download would be initiated.</li>
-        <li>Extract the zip file to get the PNGs.</li>
+        <li>Upload your PDF file.</li>
+        <li>The document will be processed automatically.</li>
+        <li>A ZIP archive will be prepared for download.</li>
+        <li>Extract the ZIP file to access the PNG images.</li>
     </ol>
     """,
 
     'Pdf to JPG': """
     <span>Instructions:</span>
     <ol>
-        <li>Upload your PDF document.</li>
-        <li>Your file would be processed automatically.</li>
-        <li>A zip file download would be initiated.</li>
-        <li>Extract the zip file to get the JPGs.</li>
+        <li>Upload your PDF file.</li>
+        <li>The document will be processed automatically.</li>
+        <li>A ZIP archive will be prepared for download.</li>
+        <li>Extract the ZIP file to access the JPG images.</li>
     </ol>
     """,
 
     'Pdf to TIFF': """
     <span>Instructions:</span>
     <ol>
-        <li>Upload your PDF document.</li>
-        <li>Your file would be processed automatically.</li>
-        <li>A zip file download would be initiated.</li>
-        <li>Extract the zip file to get the TIFFs.</li>
+        <li>Upload your PDF file.</li>
+        <li>The document will be processed automatically.</li>
+        <li>A ZIP archive will be prepared for download.</li>
+        <li>Extract the ZIP file to access the TIFF images.</li>
     </ol>
     """,
 
     'Images to Pdf': """
     <span>Instructions:</span>
     <ol>
-        <li>Upload your images.</li>
-        <li>Upon upload images would be processed automatically.</li>
-        <li>Resulting Pdf file would be downloaded automatically.</li>
+        <li>Upload your image files.</li>
+        <li>They will be automatically converted into a PDF.</li>
+        <li>The resulting PDF will be downloaded automatically.</li>
     </ol>
     """,
 
     'Pdf Compresser': """
     <span>Instructions:</span>
     <ol>
-        <li>Upload your PDF document</li>
-        <li>Choose your preferred <strong>compression intensity</strong>.</li>
-        <li>Your file would be processed automatically</li>
-        <li>Immediate download would be issued upon success</li>
+        <li>Upload your PDF file.</li>
+        <li>Select the desired <strong>compression level</strong>.</li>
+        <li>The file will be processed automatically.</li>
+        <li>A download will be initiated upon completion.</li>
     </ol>
     """,
 
     'Pdf Splitter': """
     <span>Instructions:</span>
     <ol>
-        <li>Upload your PDF document</li>
-        <li>Enter the <strong>starting</strong> and <strong>end</strong> page.</li>
-        <li>Your file would be processed automatically</li>
-        <li>Immediate download would be issued upon success</li>
+        <li>Upload your PDF file.</li>
+        <li>Specify the <strong>starting</strong> and <strong>ending</strong> pages.</li>
+        <li>The file will be processed automatically.</li>
+        <li>A download will begin once the split is complete.</li>
     </ol>
     """,
 
     'Pdf Encryptor': """
     <span>Instructions:</span>
     <ol>
-        <li>Upload your PDF document</li>
-        <li>Enter a <strong>password</strong> of your desired choice</strong>.</li>
-        <li>Your file would be processed automatically</li>
-        <li>Immediate download would be issued upon success</li>
+        <li>Upload your PDF file.</li>
+        <li>Enter a <strong>password</strong> of your choice.</li>
+        <li>The file will be encrypted automatically.</li>
+        <li>The secured file will be downloaded immediately.</li>
+    </ol>
+    """,
+
+    'Pdf Decryptor': """
+    <span>Instructions:</span>
+    <ol>
+        <li>Upload your encrypted PDF file.</li>
+        <li>Enter the <strong>current password</strong>.</li>
+        <li>The file will be decrypted automatically.</li>
+        <li>The unlocked file will be downloaded immediately.</li>
+    </ol>
+    """,
+
+    'Pdf Rotator': """
+    <span>Instructions:</span>
+    <ol>
+        <li>Upload your PDF file.</li>
+        <li>Select the <strong>rotation angle</strong>.</li>
+        <li>The file will be processed automatically.</li>
+        <li>The rotated file will be downloaded upon completion.</li>
+    </ol>
+    """,
+
+    'Text Extractor': """
+    <span>Instructions:</span>
+    <ol>
+        <li>Upload your PDF file.</li>
+        <li>The text will be extracted automatically.</li>
+        <li>A downloadable text file will be generated.</li>
+        <li>Open the downloaded file to access the extracted content.</li>
+    </ol>
+    """,
+
+    'Pdf Watermarker': """
+    <span>Instructions:</span>
+    <ol>
+        <li>Upload your PDF file.</li>
+        <li>Enter a <strong>custom watermark</strong> text.</li>
+        <li>The watermark will be applied automatically.</li>
+        <li>The modified file will be ready for immediate download.</li>
+    </ol>
+    """,
+
+    'Pdf Reorderer': """
+    <span>Instructions:</span>
+    <ol>
+        <li>Upload your PDF file.</li>
+        <li>Wait for the pages to load in the reorder panel.</li>
+        <li>Drag and drop pages to rearrange them as desired.</li>
+        <li>Click the download button once rearrangement is complete.</li>
+        <li>Your reordered PDF will be downloaded automatically.</li>
     </ol>
     """
     } %}
+
 
     <nav class="h-12 w-full p-2 bg-orange-300 flex justify-between font-medium font-serif">
         <span class="text-2xl font-bold text-white">PdfxFools</span>
@@ -238,6 +290,11 @@
                 <div class="mb-2.5 absolute bottom-3.5">
                     <div class="text-lg font-bold underline">PdfxFools</div>
                     <p class="text-[12px]">Your one stop guide to all reliable Pdf tools</p>
+                    <ul class="links flex gap-1.5">
+                        <li class="text-[12px] hover:text-orange-400 active:text-red-500 cursor-pointer">Home</li>
+                        <li class="text-[12px] hover:text-orange-400 active:text-red-500 cursor-pointer">Tools</li>
+                        <li class="text-[12px] hover:text-orange-400 active:text-red-500 cursor-pointer">Contact</li>
+                    </ul>
                 </div>
             </div>
         </div>

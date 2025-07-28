@@ -33,22 +33,18 @@ if os.environ.get('RENDER'):  # Custom flag for Render (you can set this in env 
     UPLOAD_FOLDER = '/tmp/uploads'
     OUTPUT_FOLDER = '/tmp/output'
     PREVIEW_FOLDER = '/tmp/previews'
-    TEMP_FOLDER = '/tmp/preview_temp'
 else:
     UPLOAD_FOLDER = os.path.abspath('uploads')
     OUTPUT_FOLDER = os.path.abspath('output')
     PREVIEW_FOLDER = os.path.abspath('previews')
-    TEMP_FOLDER = os.path.abspath('preview_temp')
 
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 os.makedirs(OUTPUT_FOLDER, exist_ok=True)
 os.makedirs(PREVIEW_FOLDER, exist_ok=True)
-os.makedirs(TEMP_FOLDER, exist_ok=True)
 
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 app.config['OUTPUT_FOLDER'] = OUTPUT_FOLDER
 app.config['PREVIEW_FOLDER'] = PREVIEW_FOLDER
-app.config['TEMP_FOLDER'] = TEMP_FOLDER
 
 
 def empty_dir(path):
@@ -99,49 +95,52 @@ def reorder_previews():
     data = request.json
     order = data.get('order', [])
 
-    os.makedirs(TEMP_FOLDER, exist_ok=True)
-    os.makedirs(OUTPUT_FOLDER, exist_ok=True)
+    temp_folder = 'Preview_temp'
 
-    print("Received reorder list:", order)
-    print("Preview files:", os.listdir(PREVIEW_FOLDER))
+    os.makedirs(temp_folder, exist_ok=True)
 
-    # Move in new order
+    # Move files to temp in the new order
     for i, filename in enumerate(order):
         src = os.path.join(PREVIEW_FOLDER, filename)
         if not os.path.exists(src):
-            print(f"[!] Skipping missing file: {filename}")
-            continue
-        dst = os.path.join(TEMP_FOLDER, f"{i:03d}_{filename}")
-        shutil.move(src, dst)
+         print(f"[!] Skipping missing file: {filename}")
+         continue  # skip this file
+        dst = os.path.join(temp_folder, f"{i:03d}_{filename}")
+       
+        if os.path.exists(src):
+            shutil.move(src, dst)
 
-    # Clear preview folder
+    print("Received reorder list:", order)
+    print("Existing preview files:", os.listdir(PREVIEW_FOLDER))
+
+
+    # Clear old previews and move temp back
     for f in os.listdir(PREVIEW_FOLDER):
         os.remove(os.path.join(PREVIEW_FOLDER, f))
 
-    # Move reordered images back
-    for f in sorted(os.listdir(TEMP_FOLDER)):
-        shutil.move(os.path.join(TEMP_FOLDER, f), os.path.join(PREVIEW_FOLDER, f))
+    for f in os.listdir(temp_folder):
+        shutil.move(os.path.join(temp_folder, f), os.path.join(PREVIEW_FOLDER, f))
 
-    os.rmdir(TEMP_FOLDER)
-
-    # Create PDF
+    os.rmdir(temp_folder)
     pdf_path = os.path.join(OUTPUT_FOLDER, "Reordered_pdf.pdf")
     doc = fitz.open()
 
     for filename in sorted(os.listdir(PREVIEW_FOLDER)):
         filepath = os.path.join(PREVIEW_FOLDER, filename)
         img = fitz.Pixmap(filepath)
-        if img.alpha:  # flatten transparency if present
+
+        if img.alpha:  # If image has transparency
             img = fitz.Pixmap(fitz.csRGB, img)
+
         rect = fitz.Rect(0, 0, img.width, img.height)
         page = doc.new_page(width=img.width, height=img.height)
         page.insert_image(rect, pixmap=img)
-        img = None
+        img = None  # free memory
 
     doc.save(pdf_path)
     doc.close()
 
-    return send_from_directory(OUTPUT_FOLDER, "Reordered_pdf.pdf", as_attachment=True)
+    return send_from_directory(directory=OUTPUT_FOLDER, path="Reordered_pdf.pdf", as_attachment= True)
 
 
 

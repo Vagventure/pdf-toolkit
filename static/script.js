@@ -1,3 +1,4 @@
+
 window.addEventListener('DOMContentLoaded', () => {
     const span = document.querySelector('.instructions span');
     const ol = document.querySelector('.instructions ol');
@@ -7,6 +8,15 @@ window.addEventListener('DOMContentLoaded', () => {
     if (ol) {
         ol.classList.add('list-decimal', 'pl-5');
     }
+
+    new Sortable(document.getElementById('preview-container'), {
+        animation: 150,
+        ghostClass: 'dragging',
+        touchStartThreshold: 0, // ensures instant touch response on mobile
+        delay: 100, // adds slight delay before drag starts to avoid tap misfires
+        delayOnTouchOnly: true, // only applies delay for touch devices
+        preventOnFilter: false, // improves mobile responsiveness
+    });
 });
 
 
@@ -287,7 +297,9 @@ function checkAndSubmitNormal() {
     xhr.send(formData)
 }
 
+
 function checkAndSubmitOrder() {
+
     const fileInput = document.getElementById('file-upload');
     const progressBar = document.getElementById('upload-progress');
 
@@ -336,8 +348,10 @@ function checkAndSubmitOrder() {
                         imgElem.alt = `Preview ${i + 1}`;
                         imgElem.classList.add('img-prev');
                         imgElem.className = 'w-16 h-16 object-cover rounded border';
-                        imgElem.draggable = true;
+                        // imgElem.draggable = true;
                         imgElem.dataset.filename = img;
+                        // previewContainer.innerHTML = ` `;
+                        previewContainer.classList.replace('h-32', 'h-auto')
 
                         imgElem.addEventListener('dragstart', (e) => {
                             e.dataTransfer.setData('text/plain', img);
@@ -373,7 +387,7 @@ function checkAndSubmitOrder() {
                             Pimg.dataset.filename = img;
                             box.appendChild(Pimg)
                             // box.innerHTML += ''
-                            box.querySelector('button').addEventListener('click', ()=>{
+                            box.querySelector('button').addEventListener('click', () => {
                                 box.classList.add('hidden')
                             })
 

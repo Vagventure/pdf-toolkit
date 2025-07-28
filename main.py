@@ -144,7 +144,7 @@ def reorder_previews():
 
 @app.route('/')
 def index():
-    return redirect(url_for('home'))
+    return redirect(url_for('pdf_home'))
 
 
 @app.route('/home')

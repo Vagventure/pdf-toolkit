@@ -159,7 +159,7 @@
         <div class="mb-2.5 absolute bottom-3.5">
           <div class="text-lg font-bold underline">PdfxFools</div>
           <p class="text-[12px]">Your one stop guide to all reliable Pdf tools</p>
-          <ul class="flex gap-1.5">
+          <ul class="links flex gap-1.5">
             <li class="text-[12px] hover:text-orange-400 active:text-red-500 cursor-pointer">Home</li>
             <li class="text-[12px] hover:text-orange-400 active:text-red-500 cursor-pointer">Tools</li>
             <li class="text-[12px] hover:text-orange-400 active:text-red-500 cursor-pointer">Contact</li>
@@ -168,7 +168,7 @@
       </div>
     </div>
   </nav>
-  <div class="main container min-h-dvh bg-amber-100 flex flex-col justify-center items-center gap-5">
+  <div class="main container min-h-dvh bg-orange-100 flex flex-col justify-center items-center gap-5">
     <div id="about" class="container p-2 bg-orange-100 flex flex-col justify-center items-center gap-8">
       <div
         class="w-full md:w-1/3 h-64 p-5 flex flex-col justify-center items-center bg-orange-300 rounded-tl-full rounded-br-full gap-3.5">
@@ -180,19 +180,25 @@
           Tools</button>
       </div>
       <div class="h-auto w-auto">
-        <span class="text-[28px] underline font-bold">Features</span>
-        <div class="container h-auto px-2 pt-5 flex flex-wrap justify-center items-center gap-7">
+        <span class="text-2xl underline font-bold">Features</span>
+        <div class="container h-auto px-2 pt-5 flex flex-wrap justify-center items-center gap-5">
           <div
-            class="feature-card opacity-0 translate-x-10 w-44 md:w-1/3 h-80 p-4 flex flex-col items-center justify-center text-center bg-white outline-1 rounded-2xl space-y-2 transition-all duration-700 ">
+            class="feature-card opacity-0 translate-x-10 w-42 md:w-1/3 h-80 p-3 flex flex-col items-center justify-center text-center bg-white outline-1 rounded-2xl space-y-2 transition-all duration-700 ">
             <img class="outline-1 rounded-2xl p-1" width="50"
               src="{{url_for('static', filename='icons/square-lock.svg')}}">
-            <div class="text-2xl font-bold">100% Secure</div>
-            <span class="text-lg">Your files are protected with top-level encryption for complete peace of
-              mind.</span>
+            <div class="text-2xl font-bold">Privacy Friendly</div>
+            <span class="text-lg">No file tracking, no ads, no data collection — your documents stay yours.</span>
           </div>
 
           <div
-            class="feature-card opacity-0 translate-x-10 w-44 md:w-1/3 h-80 p-4 flex flex-col items-center justify-center text-center bg-white outline-1 rounded-2xl space-y-2 transition-all duration-700 ">
+            class="feature-card opacity-0 -translate-x-10 w-42 md:w-1/3 h-80 p-3 flex flex-col items-center justify-center text-center bg-white outline-1 rounded-2xl space-y-2 transition-all duration-700 ">
+            <img class="outline-1 rounded-2xl p-1" width="50" src="{{url_for('static', filename='icons/Accfree.svg')}}">
+            <div class="text-2xl font-bold">No Account Needed</div>
+            <span class="text-lg">Use all features instantly with zero hassle, no login required.</span>
+          </div>
+
+          <div
+            class="feature-card opacity-0 translate-x-10 w-42 md:w-1/3 h-80 p-3 flex flex-col items-center justify-center text-center bg-white outline-1 rounded-2xl space-y-2 transition-all duration-700 ">
             <img class="outline-1 rounded-2xl p-1" width="50"
               src="{{url_for('static', filename='icons/checkmark.svg')}}">
             <div class="text-2xl font-bold">No Watermarks</div>
@@ -200,22 +206,88 @@
           </div>
 
           <div
-            class="feature-card opacity-0 -translate-x-10 w-44 md:w-1/3 h-80 p-4 flex flex-col items-center justify-center text-center bg-white outline-1 rounded-2xl space-y-2 transition-all duration-700 ">
-            <img class="outline-1 rounded-2xl p-1" width="50" 
+            class="feature-card opacity-0 -translate-x-10 w-42 md:w-1/3 h-80 p-3 flex flex-col items-center justify-center text-center bg-white outline-1 rounded-2xl space-y-2 transition-all duration-700 ">
+            <img class="outline-1 rounded-2xl p-1" width="50" src="{{url_for('static', filename='icons/zap.svg')}}">
+            <div class="text-2xl font-bold px-1">Blazing Fast</div>
+            <span class="text-lg">Your files are processed in seconds — no waiting, no delays.</span>
+          </div>
+
+
+          <div
+            class="feature-card opacity-0 translate-x-10 w-42 md:w-1/3 h-80 p-3 flex flex-col items-center justify-center text-center bg-white outline-1 rounded-2xl space-y-2 transition-all duration-700 ">
+            <img class="outline-1 rounded-2xl p-1" width="50"
               src="{{url_for('static', filename='icons/smart-phone.svg')}}">
             <div class="text-2xl font-bold">Mobile Friendly</div>
             <span class="text-lg">Access and use all features seamlessly on any mobile device.</span>
           </div>
 
           <div
-            class="feature-card opacity-0 -translate-x-10 w-44 md:w-1/3 h-80 p-4 flex flex-col items-center justify-center text-center bg-white outline-1 rounded-2xl space-y-2 transition-all duration-700 ">
-            <img class="outline-1 rounded-2xl p-1" width="50" 
-              src="{{url_for('static', filename='icons/cloud.svg')}}">
-            <div class="text-2xl font-bold">Cloud based</div>
-            <span class="text-lg">No installs needed—access your tools anytime, anywhere, directly from the
+            class="feature-card opacity-0 -translate-x-10 w-42 md:w-1/3 h-80 p-3 flex flex-col items-center justify-center text-center bg-white outline-1 rounded-2xl space-y-2 transition-all duration-700 ">
+            <img class="outline-1 rounded-2xl p-1" width="50" src="{{url_for('static', filename='icons/cloud.svg')}}">
+            <div class="text-2xl font-bold px-1">Cloud based</div>
+            <span class="text-lg">No installs needed—access tools anytime, anywhere, directly from the
               cloud.</span>
           </div>
+
         </div>
+      </div>
+      <div class="w-full md:w-2/6 h-42">
+        <span class="text-2xl underline font-bold">What Our Users Say:</span>
+        <div class="similiar h-auto w-full p-2 flex overflow-x-scroll space-x-3.5 scrollbar-hide" id="slider">
+          <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition min-w-full h-auto outline-1">
+            <div class="flex items-center gap-2">
+              <img src="https://i.pravatar.cc/50?img=1" alt="User 1" class="w-12 h-12 rounded-full">
+              <div>
+                <p class="font-medium">Aarav M.</p>
+                <div class="text-yellow-400 text-2xl">★★★★★</div>
+              </div>
+            </div>
+            <p class="text-sm text-black">
+              Super clean and fast! Didn’t need to sign up, and my PDFs were done in seconds.
+            </p>
+          </div>
+          <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition min-w-full h-auto outline-1">
+            <div class="flex items-center gap-2">
+              <img src="https://i.pravatar.cc/50?img=2" alt="User 2" class="w-12 h-12 rounded-full">
+              <div>
+                <p class="font-medium">Nadia S.</p>
+                <div class="text-yellow-400 text-2xl">★★★★★</div>
+              </div>
+            </div>
+            <p class="text-sm text-black">
+              Love how everything just works. No ads, no popups, just tools that do what they say.
+            </p>
+          </div>
+
+          <!-- Review 3 -->
+          <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition min-w-full h-auto outline-1">
+            <div class="flex items-center gap-2">
+              <img src="https://i.pravatar.cc/50?img=3" alt="User 3" class="w-12 h-12 rounded-full">
+              <div>
+                <p class="font-medium">Jason R.</p>
+                <div class="text-yellow-400 text-lg">★★★★☆</div>
+              </div>
+            </div>
+            <p class="text-sm text-black">
+              Merge tool saved my day! Would love a dark mode toggle but everything else is 🔥.
+            </p>
+          </div>
+
+          <!-- Review 4 -->
+          <div class="bg-white p-4 rounded-xl shadow hover:shadow-lg transition min-w-full h-auto outline-1">
+            <div class="flex items-center gap-2">
+              <img src="https://i.pravatar.cc/50?img=4" alt="User 4" class="w-12 h-12 rounded-full">
+              <div>
+                <p class="font-medium">Elena K.</p>
+                <div class="text-yellow-400 text-2xl">★★★★★</div>
+              </div>
+            </div>
+            <p class="text-sm text-black">
+              One of the simplest and most useful PDF tools online. Bookmarking this forever.
+            </p>
+          </div>
+        </div>
+
       </div>
     </div>
 
@@ -345,11 +417,25 @@
     document.querySelectorAll(".quick-tool").forEach(e => {
       e.addEventListener('click', (p) => {
         let text = p.target.innerText.trim();
-        let form = document.querySelector(`.${text.replace(/\s+/g, "-")}`);
-        form.action = `/tools/${encodeURIComponent(text)}` // or e.innerText
+        switch (text) {
+          case "Images to Pdf":
+            window.open(`http://127.0.0.1:5000/tools/Images%20to%20Pdf?img1=https%3A%2F%2Fcdn3.iconfinder.com%2Fdata%2Ficons%2Ffile-formats-part-1%2F1000%2FPNG-512.png&caption1=Images&img2=https%3A%2F%2Fst5.depositphotos.com%2F20980838%2F64706%2Fv%2F450%2Fdepositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg&caption2=Pdf&description=Quickly+merge+multiple+images+into+a+single+PDF+while+keeping+their+quality%0D%0A++++++++++and+layout+intact%E2%80%94ideal+for+sharing+or+archiving.`, '_blank')
+          case "Pdf Compresser":
+            window.open(`http://127.0.0.1:5000/tools/Pdf%20Compresser?img1=https%3A%2F%2Fst5.depositphotos.com%2F20980838%2F64706%2Fv%2F450%2Fdepositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg&caption1=Original+Pdf&img2=https%3A%2F%2Fst5.depositphotos.com%2F20980838%2F64706%2Fv%2F450%2Fdepositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg&caption2=Compressed+Pdf&description=Reduce+your+PDF+file+size+without+losing+quality%E2%80%94perfect+for+faster+uploads%2C%0D%0A++++++++++sharing%2C+and+saving+storage+space.`, '_blank')
+          case "Pdf Splitter":
+            window.open(`http://127.0.0.1:5000/tools/Pdf%20Splitter?img1=https%3A%2F%2Fst5.depositphotos.com%2F20980838%2F64706%2Fv%2F450%2Fdepositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg&caption1=Original+Pdf&img2=https%3A%2F%2Fst5.depositphotos.com%2F20980838%2F64706%2Fv%2F450%2Fdepositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg&caption2=Splitted+Pdf&description=Split+large+PDFs+into+smaller+files+or+extract+specific+pages+with+full%0D%0A++++++++++control+and+fast+processing.`, '_blank')
+          case "Pdf Encryptor":
+            window.open(`http://127.0.0.1:5000/tools/Pdf%20Encryptor?img1=https%3A%2F%2Fst5.depositphotos.com%2F20980838%2F64706%2Fv%2F450%2Fdepositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg&caption1=Original+Pdf&img2=https%3A%2F%2Fst2.depositphotos.com%2F42596756%2F44437%2Fv%2F600%2Fdepositphotos_444376980-stock-illustration-file-folders-vector-icon.jpg&caption2=Locked+Pdf&description=Add+strong+password+protection+to+your+PDFs+to+prevent+unauthorized+access%2C%0D%0A++++++++++copying%2C+or+editing.`, '_blank')
+          case "Pdf to PNG":
+            window.open(`http://127.0.0.1:5000/tools/Pdf%20to%20PNG?img1=https%3A%2F%2Fst5.depositphotos.com%2F20980838%2F64706%2Fv%2F450%2Fdepositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg&caption1=Original+Pdf&img2=https%3A%2F%2Fst2.depositphotos.com%2F47577860%2F46963%2Fv%2F600%2Fdepositphotos_469635890-stock-illustration-file-format-png-icon.jpg&caption2=PNGs&description=Turn+PDFs+into+crystal-clear+PNG+images%2C+ideal+for+designs%2C+transparency%2C+and%0D%0A++++++++++digital+use.`, '_blank')
+          case "Pdf to JPG":
+            window.open(`http://127.0.0.1:5000/tools/Pdf%20to%20JPG?img1=https%3A%2F%2Fst5.depositphotos.com%2F20980838%2F64706%2Fv%2F450%2Fdepositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg&caption1=Original+Pdf&img2=https%3A%2F%2Fst.depositphotos.com%2F57803962%2F56363%2Fv%2F600%2Fdepositphotos_563637420-stock-illustration-file-format-icon-vector-illustration.jpg&caption2=JPGs&description=Convert+PDF+pages+to+sharp%2C+high-resolution+JPG+images+suitable+for+sharing%2C%0D%0A++++++++++previews%2C+or+web+use.`, '_blank')
+          case "Pdf to TIFF":
+            window.open(`http://127.0.0.1:5000/tools/Pdf%20to%20TIFF?img1=https%3A%2F%2Fst5.depositphotos.com%2F20980838%2F64706%2Fv%2F450%2Fdepositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg&caption1=Original+Pdf&img2=https%3A%2F%2Fst4.depositphotos.com%2F1000507%2F23793%2Fv%2F600%2Fdepositphotos_237931072-stock-illustration-tagged-image-file-format.jpg&caption2=TIFFs&description=Generate+high-quality+TIFF+images+from+your+PDFs%2C+perfect+for+printing%2C%0D%0A++++++++++scanning%2C+or+archiving.`, '_blank')
+          case "Pdf Merger":
+            window.open(`http://127.0.0.1:5000/tools/Pdf%20Merger?img1=https%3A%2F%2Fst5.depositphotos.com%2F20980838%2F64706%2Fv%2F450%2Fdepositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg&caption1=Original+Pdf&img2=https%3A%2F%2Fst5.depositphotos.com%2F20980838%2F64706%2Fv%2F450%2Fdepositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg&caption2=Merged+Pdf&description=Easily+combine+multiple+PDF+files+into+a+single%2C+well-structured+document%0D%0A++++++++++while+preserving+layout+and+quality.`, '_blank')
 
-        form.target = "_blank";
-        form.submit();
+        }
       })
 
     })
@@ -357,7 +443,11 @@
     document.querySelectorAll(".links li").forEach(e => {
       e.addEventListener('click', (event) => {
         address = event.target.innerText.toLowerCase();
-        window.open(`/${address}`, '_blank')
+        if (address === "home") {
+          return
+        } else {
+          window.open(`/${address}`, '_blank')
+        }
       })
 
     })
@@ -365,6 +455,19 @@
     document.querySelector(".tools-btn").addEventListener('click', () => {
       window.open('/tools', '_blank')
     })
+
+    const slider = document.getElementById('slider')
+    const kids = slider.children;
+    let current = 0;
+
+    setInterval(() => {
+      current = (current + 1) % kids.length;
+      let ScrollX = current * slider.clientWidth;
+      slider.scrollTo({
+        left: ScrollX,
+        behavior: 'smooth'
+      })
+    }, 3000)
   </script>
 </body>
 

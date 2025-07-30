@@ -662,7 +662,8 @@
       //     ans.classList.toggle('hidden');
       //   });
       // })
-      
+
+
       document.querySelectorAll(".tools").forEach(e => {
         e.addEventListener('click', (p) => {
           let text = p.target.innerText.trim();
@@ -706,11 +707,14 @@
       document.querySelectorAll(".links li").forEach(e => {
         e.addEventListener('click', (event) => {
           address = event.target.innerText.toLowerCase();
-          window.open(`/${address}`, '_blank')
+          if (address === "tools") {
+            return
+          } else {
+            window.open(`/${address}`, '_blank')
+          }
         })
 
       })
-
 
     </script>
 </body>

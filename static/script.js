@@ -771,6 +771,7 @@ document.querySelectorAll(".quick-tool, .Reco-tool").forEach(e => {
         <input type="hidden" name="description" value="Add strong password protection to your PDFs to prevent unauthorized access,
           copying, or editing.">`
                 break
+            
             case "Pdf Encryptor":
                 form.classList.add(opr)
                 form.action = `/tools/${encodeURIComponent(text)}`
@@ -788,6 +789,23 @@ document.querySelectorAll(".quick-tool, .Reco-tool").forEach(e => {
           copying, or editing.">`
                 break
 
+            case "Pdf Reorderer":
+                form.classList.add(opr)
+                form.action = `/tools/${encodeURIComponent(text)}`
+                form.innerHTML = `
+                
+                        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption2" value="Reordered Pdf">
+
+        <input type="hidden" name="description" value="Drag and drop to rearrange pages and create the perfect flow. Your document,
+          your rules — in just seconds.">`
+                break
+
 
         }
 
@@ -797,5 +815,4 @@ document.querySelectorAll(".quick-tool, .Reco-tool").forEach(e => {
     })
 
 })
-
 

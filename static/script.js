@@ -19,13 +19,13 @@ window.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-  document.querySelectorAll(".links li").forEach(e => {
-        e.addEventListener('click', (event) => {
-          address = event.target.innerText.toLowerCase();
-          window.open(`/${address}`, '_blank')
-        })
+document.querySelectorAll(".links li").forEach(e => {
+    e.addEventListener('click', (event) => {
+        address = event.target.innerText.toLowerCase();
+        window.open(`/${address}`, '_blank')
+    })
 
-      })
+})
 
 const slider = document.getElementById('slider')
 const kids = slider.children;
@@ -33,12 +33,12 @@ let current = 0;
 
 setInterval(() => {
     current = (current + 1) % kids.length;
-    let ScrollX = current * slider.clientWidth;
+    let ScrollX = current * kids[0].clientWidth;
     slider.scrollTo({
         left: ScrollX,
         behavior: 'smooth'
     })
-}, 5000)
+}, 3000)
 
 function checkAndSubmit() {
     const start = document.getElementById("start").value.trim();
@@ -412,6 +412,13 @@ function checkAndSubmitOrder() {
                 e.preventDefault();
                 const container = document.getElementById('preview-container');
                 const orderedFilenames = [...container.children].map(child => child.dataset.filename);
+                document.querySelector(".blinker")?.classList.add('hidden');
+                document.querySelector(".blinker2")?.classList.add('hidden');
+                setInterval(() => {
+                    sig = document.querySelector(".blinker")
+                    sig.classList.toggle('hidden')
+
+                }, 500);
 
                 fetch('/reorder-previews', {
                     method: 'POST',
@@ -429,6 +436,8 @@ function checkAndSubmitOrder() {
                         a.href = url;
                         a.download = "Reordered_pdf.pdf";  // Optional: customize name
                         document.body.appendChild(a);
+                        document.querySelector(".blinker2")?.classList.remove('hidden');
+                        document.querySelector(".blinker")?.classList.add('hidden');
                         a.click();
                         a.remove();
                         window.URL.revokeObjectURL(url);
@@ -771,7 +780,7 @@ document.querySelectorAll(".quick-tool, .Reco-tool").forEach(e => {
         <input type="hidden" name="description" value="Add strong password protection to your PDFs to prevent unauthorized access,
           copying, or editing.">`
                 break
-            
+
             case "Pdf Encryptor":
                 form.classList.add(opr)
                 form.action = `/tools/${encodeURIComponent(text)}`
@@ -804,6 +813,74 @@ document.querySelectorAll(".quick-tool, .Reco-tool").forEach(e => {
 
         <input type="hidden" name="description" value="Drag and drop to rearrange pages and create the perfect flow. Your document,
           your rules — in just seconds.">`
+                break
+
+            case "Pdf Decryptor":
+                form.classList.add(opr)
+                form.action = `/tools/${encodeURIComponent(text)}`
+                form.innerHTML = `
+                
+                        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption2" value="Unlocked Pdf">
+
+        <input type="hidden" name="description" value="Remove passwords and restrictions to enjoy hassle-free access and editing. Say
+          goodbye to locked content — your files, your control.">`
+                break
+
+            case "Pdf Watermarker":
+                form.classList.add(opr)
+                form.action = `/tools/${encodeURIComponent(text)}`
+                form.innerHTML = `
+                
+                        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://cdn.iconscout.com/icon/premium/png-512-thumb/stamp-approved-icon-download-in-svg-png-gif-file-formats--mark-seal-verified-accept-confirm-approve-document-pack-files-folders-icons-12490322.png?f=webp&w=512">
+        <input type="hidden" name="caption2" value="Watermarked Pdf">
+
+        <input type="hidden" name="description" value="Add custom text or image watermarks to your PDF files and safeguard your
+          documents with style and clarity.">`
+                break
+
+            case "Pdf Rotator":
+                form.classList.add(opr)
+                form.action = `/tools/${encodeURIComponent(text)}`
+                form.innerHTML = `
+                
+                        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption2" value="Rotated Pdf">
+
+        <input type="hidden" name="description" value="Effortlessly rotate selected or all pages to the correct orientation for
+          better readability and presentation.">`
+                break
+
+            case "Text Extractor":
+                form.classList.add(opr)
+                form.action = `/tools/${encodeURIComponent(text)}`
+                form.innerHTML = `
+                
+                        <input type="hidden" name="img1"
+          value="https://st5.depositphotos.com/20980838/64706/v/450/depositphotos_647060022-stock-illustration-pdf-icon-vector-illustration-flat.jpg">
+        <input type="hidden" name="caption1" value="Original Pdf">
+
+        <input type="hidden" name="img2"
+          value="https://st2.depositphotos.com/1431107/11791/v/600/depositphotos_117915872-stock-illustration-text-file-icon.jpg">
+        <input type="hidden" name="caption2" value="Text file">
+
+        <input type="hidden" name="description" value="Extract clean, editable text from any PDF with ease. Perfect for copying,
+          searching, or repurposing content without the formatting mess.">`
                 break
 
 
